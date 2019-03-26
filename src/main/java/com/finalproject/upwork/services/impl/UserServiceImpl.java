@@ -24,18 +24,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserProfileDetails(UserProfileModel userProfileModel) {
+    public void addUserProfileDetails(UserProfileModel userProfileModel , UserLoginModel userLoginModel) {
+        userProfileModel.setLoginDetails(userLoginModel);
         userProfileRepository.save(userProfileModel);
     }
 
     @Override
-    public UserProfileModel getById(long id) {
+    public UserProfileModel getProfileById(long id) {
         return userProfileRepository.findById(id).get();
     }
 
     @Override
     public List<UserProfileModel> whereSkillISJava(String skill) {
          return userProfileRepository.findAllBySkill("Java");
+    }
+
+    @Override
+    public UserLoginModel getLoginById(long id) {
+        return userLoginRepository.findById(id).get();
     }
 
 

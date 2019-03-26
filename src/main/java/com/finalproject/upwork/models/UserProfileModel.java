@@ -21,8 +21,11 @@ public class UserProfileModel {
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id" , referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id")
     private UserLoginModel loginDetails;
+
+    @Column(name = "user_id")
+    private long user_id ;
 
     @Column(name = "name" , nullable = false)
     private String name;

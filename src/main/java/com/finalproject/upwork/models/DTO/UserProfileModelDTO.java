@@ -11,8 +11,6 @@ public class UserProfileModelDTO {
 
     private long id;
 
-    private UserLoginDTO user_id;
-
     @SpecialChars
     @Size(min = 2)
     private String surname;

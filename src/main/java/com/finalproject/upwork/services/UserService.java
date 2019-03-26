@@ -10,9 +10,10 @@ import java.util.List;
 public interface UserService {
 
     void addUser(UserLoginModel userLoginModel);
-    void addUserProfileDetails(UserProfileModel userProfileModel);
-    UserProfileModel getById(long id);
+    void addUserProfileDetails(UserProfileModel userProfileModel , UserLoginModel userLoginModel);
+    UserProfileModel getProfileById(long id);
     List<UserProfileModel> whereSkillISJava(String skill);
+    UserLoginModel getLoginById(long id);
 
 }
 
