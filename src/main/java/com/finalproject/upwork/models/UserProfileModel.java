@@ -1,16 +1,16 @@
 package com.finalproject.upwork.models;
 
-import com.finalproject.upwork.validation.annotations.SpecialChars;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 
 @Data
 @Entity
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_profile_details")
@@ -20,9 +20,9 @@ public class UserProfileModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
-    private UserLoginModel userLoginModel;
+    private UserLoginModel loginDetails;
 
     @Column(name = "name" , nullable = false)
     private String name;
@@ -36,8 +36,8 @@ public class UserProfileModel {
     @Column(name = "surname" )
     private String surname;
 
-    @Column(name = "mail", unique = true , nullable = false)
-    private String mail;
+    @Column(name = "email", unique = true , nullable = false)
+    private String email;
 
 
 }

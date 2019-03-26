@@ -21,31 +21,26 @@ public class TaskModel {
     private long task_ID;
 
     @Column(name = "topic", unique = true , nullable = false)
-    @Size(min = 3 , max = 25 )
     private String topic;
 
     @Column(name = "description" , nullable = false)
-    @Size(min = 3 , max = 350)
     private String description;
 
     @Column(name = "hardness" , nullable = false)
-    @SpecialChars
     private String hardnessLevel;
 
     @Column(name = "type" , nullable = false)
-    @SpecialChars
     private String type;
 
     @Column(name = "deadline" , nullable = false)
     private Date deadline;
 
     @Column(name = "payment" , nullable = false)
-    @SpecialChars
     private int payment;
 
     @ManyToOne
-    @JoinColumn(name = "who_posted" , nullable = false)
-    private UserLoginModel whoPostedId;
+    @JoinColumn(name = "who_posted" ,referencedColumnName = "id" , nullable = false)
+    private UserLoginModel whoPosted;
 
 
 }

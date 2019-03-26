@@ -7,11 +7,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 @Data
-public class UserProfileModelDTO  {
+public class UserProfileModelDTO {
 
     private long id;
 
-    private long user_id;
+    private UserLoginDTO user_id;
 
     @SpecialChars
     @Size(min = 2)
