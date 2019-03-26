@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SubmitedDTO {
 
-    private Long id;
+    private long id;
 
     private UserLoginDTO submited_user;
 
