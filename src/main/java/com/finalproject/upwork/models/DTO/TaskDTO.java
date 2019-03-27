@@ -4,14 +4,12 @@ import com.finalproject.upwork.validation.annotations.SpecialChars;
 import lombok.Data;
 
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Data
 public class TaskDTO {
 
     private long task_ID;
 
-    private UserLoginDTO whoPosted;
 
     @Size(min = 3 , max = 25 )
     private String topic;
@@ -25,8 +23,7 @@ public class TaskDTO {
     @SpecialChars
     private String type;
 
-    private Date deadline;
+//    private Date deadline;
 
-    @SpecialChars
     private int payment;
 }

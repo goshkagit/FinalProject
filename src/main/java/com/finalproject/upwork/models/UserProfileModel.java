@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Data
@@ -14,18 +15,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user_profile_details")
-public class UserProfileModel {
+public class UserProfileModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id")
-    private UserLoginModel loginDetails;
+    @JoinColumn(name = "user_id" , referencedColumnName = "id")
+    private UserLoginModel user_id;
 
-    @Column(name = "user_id")
-    private long user_id ;
+    @Column(name = "nickname")
+    private String nickname;
 
     @Column(name = "name" , nullable = false)
     private String name;

@@ -18,7 +18,7 @@ public class TaskModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long task_ID;
+    private long task_id;
 
     @Column(name = "topic", unique = true , nullable = false)
     private String topic;
@@ -32,15 +32,16 @@ public class TaskModel {
     @Column(name = "type" , nullable = false)
     private String type;
 
-    @Column(name = "deadline" , nullable = false)
-    private Date deadline;
+//    @Column(name = "deadline")
+//    private Date deadline;
 
     @Column(name = "payment" , nullable = false)
     private int payment;
 
     @ManyToOne
-    @JoinColumn(name = "who_posted" ,referencedColumnName = "id" , nullable = false)
-    private UserLoginModel whoPosted;
+    @JoinColumn(referencedColumnName = "user_id" , nullable = false)
+    private UserProfileModel who_posted;
+
 
 
 }

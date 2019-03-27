@@ -27,8 +27,11 @@ public class UserController {
 
     @PostMapping("/addUser")
     public ResponseEntity addUser(@Valid @RequestBody UserLoginDTO userLoginModelDTO){
+
            UserLoginModel userLoginModel = modelMapper.map(userLoginModelDTO , UserLoginModel.class);
+
            userService.addUser(userLoginModel);
+
            return ResponseEntity.ok("Sign up successfully");
     }
 
@@ -39,15 +42,13 @@ public class UserController {
 
         UserLoginModel userLoginModel = userService.getLoginById(id);
 
-        userProfileModel.setUser_id(userLoginModel.getId());
-
         userService.addUserProfileDetails(userProfileModel , userLoginModel);
 
         return ResponseEntity.ok("Details added successfully");
     }
 
     @GetMapping("/getByID/{id}")
-   public ResponseEntity getUser(@PathVariable long id) throws IOException {
+   public ResponseEntity getUser(@PathVariable long id) {
             return ResponseEntity.ok(userService.getProfileById(id).toString());
     }
 

@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUserProfileDetails(UserProfileModel userProfileModel , UserLoginModel userLoginModel) {
-        userProfileModel.setLoginDetails(userLoginModel);
+
+        userProfileModel.setUser_id(userLoginModel);
         userProfileRepository.save(userProfileModel);
     }
 

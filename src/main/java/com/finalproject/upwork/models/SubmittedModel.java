@@ -10,19 +10,19 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "submited")
-public class SubmitedModel {
+@Table(name = "submitted")
+public class SubmittedModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id" , referencedColumnName = "id")
-    private UserLoginModel submitedUsersId;
+    @JoinColumn(referencedColumnName = "user_id")
+    private UserProfileModel submittedUsersId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "submited_tasks" , referencedColumnName = "task_ID")
-    private TaskModel taskModel;
+    @JoinColumn(referencedColumnName = "task_id")
+    private TaskModel submittedTaskId;
 
 }
