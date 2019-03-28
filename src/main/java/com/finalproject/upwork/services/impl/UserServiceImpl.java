@@ -7,6 +7,7 @@ import com.finalproject.upwork.repositories.UserLoginRepository;
 import com.finalproject.upwork.repositories.UserProfileRepository;
 import com.finalproject.upwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +16,22 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserLoginRepository userLoginRepository;
+
     @Autowired
     private UserProfileRepository userProfileRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @Override
     public void addUser(UserLoginModel userLoginModel) {
-           userLoginRepository.save(userLoginModel);
+
+        String password = userLoginModel.getPassword();
+
+        userLoginModel.setPassword(passwordEncoder.encode(password));
+
+        userLoginRepository.save(userLoginModel);
     }
 
     @Override
@@ -38,6 +49,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserProfileModel> whereSkillISJava(String skill) {
          return userProfileRepository.findAllBySkill("Java");
+    }
+
+    @Override
+    public UserLoginModel findByNickname(String nickname) {
+        return userLoginRepository.findByNickname(nickname);
     }
 
     @Override

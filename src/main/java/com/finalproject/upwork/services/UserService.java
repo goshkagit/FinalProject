@@ -19,6 +19,7 @@ public interface UserService {
 
     List<UserProfileModel> whereSkillISJava(String skill);
 
+    UserLoginModel findByNickname(String nickname);
 }
 
 
