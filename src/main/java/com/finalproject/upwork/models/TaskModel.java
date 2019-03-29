@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -27,13 +29,15 @@ public class TaskModel {
     private String description;
 
     @Column(name = "hardness" , nullable = false)
-    private String hardnessLevel;
+    @Enumerated(EnumType.STRING)
+    private Hardness hardness;
 
     @Column(name = "type" , nullable = false)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
-//    @Column(name = "deadline")
-//    private Date deadline;
+    @Column(name = "deadline")
+    private LocalDate deadline;
 
     @Column(name = "payment" , nullable = false)
     private int payment;

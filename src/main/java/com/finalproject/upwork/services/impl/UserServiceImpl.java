@@ -1,6 +1,8 @@
 package com.finalproject.upwork.services.impl;
 
 
+import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
+import com.finalproject.upwork.models.Type;
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.repositories.UserLoginRepository;
@@ -23,6 +25,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserService userService;
+
 
     @Override
     public void addUser(UserLoginModel userLoginModel) {
@@ -35,9 +40,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserProfileDetails(UserProfileModel userProfileModel , UserLoginModel userLoginModel) {
+    public void addUserProfileDetails(UserProfileModel userProfileModel , UserProfileModelDTO dto , long id ) {
 
-        userProfileModel.setUser_id(userLoginModel);
+        userProfileModel.setSkill(Type.valueOf(dto.getSkill().toUpperCase()));
+
+        userProfileModel.setUser_id(userService.getLoginById(id));
+
         userProfileRepository.save(userProfileModel);
     }
 
@@ -46,10 +54,6 @@ public class UserServiceImpl implements UserService {
         return userProfileRepository.findById(id).get();
     }
 
-    @Override
-    public List<UserProfileModel> whereSkillISJava(String skill) {
-         return userProfileRepository.findAllBySkill("Java");
-    }
 
     @Override
     public UserLoginModel findByNickname(String nickname) {

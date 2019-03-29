@@ -18,7 +18,6 @@ public class SubmittedController {
     @PostMapping("/submit/{task_id}/{user_id}")
     public ResponseEntity submit(@PathVariable long task_id , @PathVariable  long user_id){
 
-
         submitService.submit(task_id, user_id);
 
         return ResponseEntity.ok("Submitted");

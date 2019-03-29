@@ -25,14 +25,12 @@ public class UserProfileModel implements Serializable {
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
     private UserLoginModel user_id;
 
-    @Column(name = "nickname")
-    private String nickname;
-
     @Column(name = "name" , nullable = false)
     private String name;
 
     @Column(name = "skill" , nullable = false)
-    private String skill;
+    @Enumerated(EnumType.STRING)
+    private Type skill;
 
     @Column(name = "portfolio")
     private String portfolio;

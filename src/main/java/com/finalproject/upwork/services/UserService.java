@@ -1,6 +1,7 @@
 package com.finalproject.upwork.services;
 
 
+import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 
@@ -11,13 +12,11 @@ public interface UserService {
 
     void addUser(UserLoginModel userLoginModel);
 
-    void addUserProfileDetails(UserProfileModel userProfileModel , UserLoginModel userLoginModel);
+    void addUserProfileDetails(UserProfileModel userProfileModel  , UserProfileModelDTO  userProfileModelDTO , long id);
 
     UserLoginModel getLoginById(long id);
 
     UserProfileModel getProfileById(long id);
-
-    List<UserProfileModel> whereSkillISJava(String skill);
 
     UserLoginModel findByNickname(String nickname);
 }

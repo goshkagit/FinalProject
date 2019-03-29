@@ -2,7 +2,9 @@ package com.finalproject.upwork.controllers;
 
 
 import com.finalproject.upwork.models.DTO.TaskDTO;
+import com.finalproject.upwork.models.Hardness;
 import com.finalproject.upwork.models.TaskModel;
+import com.finalproject.upwork.models.Type;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.services.TaskService;
 import com.finalproject.upwork.services.UserService;
@@ -21,21 +23,14 @@ public class TaskController {
     TaskService taskService;
 
     @Autowired
-    UserService userService;
-
-    @Autowired
     private ModelMapper modelMapper;
 
 
     @PostMapping("/addTask/{user_id}")
-    public ResponseEntity addTask(@Valid @RequestBody TaskDTO taskDTO , @PathVariable long user_id ){
-        TaskModel taskModel = modelMapper.map(taskDTO , TaskModel.class);
+    public ResponseEntity addTask(@Valid @RequestBody TaskDTO taskDTO, @PathVariable long user_id) {
+        TaskModel taskModel = modelMapper.map(taskDTO, TaskModel.class);
 
-        UserProfileModel userProfile = userService.getProfileById(user_id);
-
-        taskModel.setWho_posted(userProfile);
-
-        taskService.addTask(taskModel);
+        taskService.addTask(taskModel , taskDTO ,  user_id);
 
         return ResponseEntity.ok("Task uploaded successfully");
     }

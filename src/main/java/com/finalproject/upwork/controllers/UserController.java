@@ -40,9 +40,7 @@ public class UserController {
 
         UserProfileModel userProfileModel = modelMapper.map(userProfileModelDTO , UserProfileModel.class);
 
-        UserLoginModel userLoginModel = userService.getLoginById(id);
-
-        userService.addUserProfileDetails(userProfileModel , userLoginModel);
+        userService.addUserProfileDetails(userProfileModel , userProfileModelDTO , id);
 
         return ResponseEntity.ok("Details added successfully");
     }
