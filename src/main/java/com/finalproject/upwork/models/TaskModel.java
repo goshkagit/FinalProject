@@ -1,15 +1,13 @@
 package com.finalproject.upwork.models;
 
-import com.finalproject.upwork.validation.annotations.SpecialChars;
+import com.finalproject.upwork.models.enums.Hardness;
+import com.finalproject.upwork.models.enums.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +18,7 @@ public class TaskModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long task_id;
+    private long taskId;
 
     @Column(name = "topic", unique = true , nullable = false)
     private String topic;
@@ -43,8 +41,8 @@ public class TaskModel {
     private int payment;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "user_id" , nullable = false)
-    private UserProfileModel who_posted;
+    @JoinColumn(referencedColumnName = "userId" , nullable = false)
+    private UserProfileModel whoPosted;
 
 
 

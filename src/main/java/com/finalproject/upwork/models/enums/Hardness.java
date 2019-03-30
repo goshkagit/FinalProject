@@ -1,4 +1,4 @@
-package com.finalproject.upwork.models;
+package com.finalproject.upwork.models.enums;
 
 public enum Hardness {
     EASY,

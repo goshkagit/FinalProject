@@ -2,19 +2,18 @@ package com.finalproject.upwork.controllers;
 
 
 import com.finalproject.upwork.models.DTO.TaskDTO;
-import com.finalproject.upwork.models.Hardness;
 import com.finalproject.upwork.models.TaskModel;
-import com.finalproject.upwork.models.Type;
-import com.finalproject.upwork.models.UserProfileModel;
+import com.finalproject.upwork.models.enums.Hardness;
+import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.services.TaskService;
-import com.finalproject.upwork.services.UserService;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 
 @RestController
 public class TaskController {
@@ -26,17 +25,23 @@ public class TaskController {
     private ModelMapper modelMapper;
 
 
-    @PostMapping("/addTask/{user_id}")
-    public ResponseEntity addTask(@Valid @RequestBody TaskDTO taskDTO, @PathVariable long user_id) {
+
+
+
+    @PostMapping("/addTask/{userId}")
+
+    public ResponseEntity addTask(@Valid @RequestBody TaskDTO taskDTO, @PathVariable long userId) {
+
         TaskModel taskModel = modelMapper.map(taskDTO, TaskModel.class);
 
-        taskService.addTask(taskModel , taskDTO ,  user_id);
+        taskService.addTask(taskModel , userId);
 
         return ResponseEntity.ok("Task uploaded successfully");
     }
 
-    @GetMapping("/getTaskByID/{id}")
-    public ResponseEntity getUser(@PathVariable long id) throws IOException {
-        return ResponseEntity.ok(taskService.getTask(id).toString());
+    @GetMapping("/getTaskByID/{whoPostedId}")
+    public ResponseEntity getUser(@PathVariable long whoPostedId) {
+        return ResponseEntity.ok(taskService.getTask(whoPostedId));
     }
+
 }

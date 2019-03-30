@@ -18,11 +18,11 @@ public class SubmittedModel {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "user_id")
+    @JoinColumn(referencedColumnName = "userId")
     private UserProfileModel submittedUsersId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "task_id")
+    @JoinColumn(referencedColumnName = "taskId")
     private TaskModel submittedTaskId;
 
 }

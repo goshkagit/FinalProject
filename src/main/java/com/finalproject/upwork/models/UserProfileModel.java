@@ -1,5 +1,6 @@
 package com.finalproject.upwork.models;
 
+import com.finalproject.upwork.models.enums.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,8 @@ public class UserProfileModel implements Serializable {
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id" , referencedColumnName = "id")
-    private UserLoginModel user_id;
+    @JoinColumn(name = "userId" , referencedColumnName = "id")
+    private UserLoginModel userId;
 
     @Column(name = "name" , nullable = false)
     private String name;

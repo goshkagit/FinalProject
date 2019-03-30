@@ -5,6 +5,6 @@ import com.finalproject.upwork.models.TaskModel;
 
 public interface TaskService {
 
-    void addTask(TaskModel taskModel , TaskDTO taskDTO ,  long id);
+    void addTask(TaskModel taskModel  ,  long id);
     TaskModel getTask(long id);
 }

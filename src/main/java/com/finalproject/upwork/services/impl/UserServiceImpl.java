@@ -2,7 +2,7 @@ package com.finalproject.upwork.services.impl;
 
 
 import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
-import com.finalproject.upwork.models.Type;
+import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.repositories.UserLoginRepository;
@@ -11,8 +11,6 @@ import com.finalproject.upwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,11 +38,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserProfileDetails(UserProfileModel userProfileModel , UserProfileModelDTO dto , long id ) {
+    public void addUserProfileDetails(UserProfileModel userProfileModel , UserProfileModelDTO dto , long userId ) {
 
         userProfileModel.setSkill(Type.valueOf(dto.getSkill().toUpperCase()));
 
-        userProfileModel.setUser_id(userService.getLoginById(id));
+        userProfileModel.setUserId(userService.getLoginById(userId));
 
         userProfileRepository.save(userProfileModel);
     }
@@ -61,8 +59,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserLoginModel getLoginById(long id) {
-        return userLoginRepository.findById(id).get();
+    public UserLoginModel getLoginById(long loginId) {
+        return userLoginRepository.findById(loginId).get();
     }
 
 

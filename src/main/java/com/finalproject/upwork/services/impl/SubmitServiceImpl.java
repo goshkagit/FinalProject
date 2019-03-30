@@ -25,10 +25,11 @@ public class SubmitServiceImpl implements SubmitService {
 
 
     @Override
-    public void submit(long task_id , long user_id) {
-        TaskModel task = taskService.getTask(task_id);
+    public void submit(long taskId, long userId) {
 
-        UserProfileModel profile = userService.getProfileById(user_id);
+        TaskModel task = taskService.getTask(taskId);
+
+        UserProfileModel profile = userService.getProfileById(userId);
 
         SubmittedModel submittedModel = new SubmittedModel();
 

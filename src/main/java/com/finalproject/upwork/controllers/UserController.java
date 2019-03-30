@@ -35,19 +35,19 @@ public class UserController {
            return ResponseEntity.ok("Sign up successfully");
     }
 
-    @PostMapping("/addUserDetails/{id}")
-    public ResponseEntity addUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO , @PathVariable long id){
+    @PostMapping("/addUserDetails/{loginId}")
+    public ResponseEntity addUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO , @PathVariable long loginId){
 
         UserProfileModel userProfileModel = modelMapper.map(userProfileModelDTO , UserProfileModel.class);
 
-        userService.addUserProfileDetails(userProfileModel , userProfileModelDTO , id);
+        userService.addUserProfileDetails(userProfileModel , userProfileModelDTO , loginId);
 
         return ResponseEntity.ok("Details added successfully");
     }
 
-    @GetMapping("/getByID/{id}")
-   public ResponseEntity getUser(@PathVariable long id) {
-            return ResponseEntity.ok(userService.getProfileById(id).toString());
+    @GetMapping("/getByID/{profileId}")
+   public ResponseEntity getUser(@PathVariable long profileId) {
+            return ResponseEntity.ok(userService.getProfileById(profileId).toString());
     }
 
 }

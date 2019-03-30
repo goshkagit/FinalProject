@@ -15,10 +15,10 @@ public class SubmittedController {
     SubmitService submitService;
 
 
-    @PostMapping("/submit/{task_id}/{user_id}")
-    public ResponseEntity submit(@PathVariable long task_id , @PathVariable  long user_id){
+    @PostMapping("/submit/{taskId}/{userId}")
+    public ResponseEntity submit(@PathVariable long taskId , @PathVariable  long userId){
 
-        submitService.submit(task_id, user_id);
+        submitService.submit(taskId, userId);
 
         return ResponseEntity.ok("Submitted");
     }
