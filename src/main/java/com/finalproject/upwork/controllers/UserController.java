@@ -20,6 +20,9 @@ import java.io.IOException;
 public class UserController {
 
     @Autowired
+    private ModelMapper profileModelMapper;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
@@ -38,9 +41,9 @@ public class UserController {
     @PostMapping("/addUserDetails/{loginId}")
     public ResponseEntity addUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO , @PathVariable long loginId){
 
-        UserProfileModel userProfileModel = modelMapper.map(userProfileModelDTO , UserProfileModel.class);
+        UserProfileModel userProfileModel = profileModelMapper.map(userProfileModelDTO , UserProfileModel.class);
 
-        userService.addUserProfileDetails(userProfileModel , userProfileModelDTO , loginId);
+        userService.addUserProfileDetails(userProfileModel , loginId);
 
         return ResponseEntity.ok("Details added successfully");
     }

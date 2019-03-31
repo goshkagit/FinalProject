@@ -13,11 +13,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@TableGenerator(name = "gen"  ,allocationSize = 100)
 @Table(name = "tasks")
 public class TaskModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE ,generator = "gen")
     private long taskId;
 
     @Column(name = "topic", unique = true , nullable = false)

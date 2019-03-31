@@ -12,7 +12,7 @@ public interface UserService {
 
     void addUser(UserLoginModel userLoginModel);
 
-    void addUserProfileDetails(UserProfileModel userProfileModel  , UserProfileModelDTO  userProfileModelDTO , long id);
+    void addUserProfileDetails(UserProfileModel userProfileModel  , long id);
 
     UserLoginModel getLoginById(long id);
 

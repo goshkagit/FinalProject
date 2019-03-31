@@ -10,11 +10,12 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@TableGenerator(name = "gen"  ,allocationSize = 100)
 @Table(name = "submitted")
 public class SubmittedModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE , generator = "gen")
     private Long id;
 
     @ManyToOne

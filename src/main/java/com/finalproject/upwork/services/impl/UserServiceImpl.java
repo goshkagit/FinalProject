@@ -38,9 +38,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserProfileDetails(UserProfileModel userProfileModel , UserProfileModelDTO dto , long userId ) {
+    public void addUserProfileDetails(UserProfileModel userProfileModel  , long userId ) {
 
-        userProfileModel.setSkill(Type.valueOf(dto.getSkill().toUpperCase()));
 
         userProfileModel.setUserId(userService.getLoginById(userId));
 

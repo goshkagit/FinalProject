@@ -24,10 +24,6 @@ public class TaskServiceImpl implements TaskService {
 
         taskModel.setWhoPosted(userService.getProfileById(userId));
 
-//        taskModel.setType(Type.valueOf(taskDTO.getType().toUpperCase()));
-
-//        taskModel.setHardness(Hardness.valueOf(taskDTO.getHardness().toUpperCase()));
-
         taskRepository.save(taskModel);
     }
 

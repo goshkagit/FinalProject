@@ -22,26 +22,25 @@ public class TaskController {
     TaskService taskService;
 
     @Autowired
-    private ModelMapper modelMapper;
-
-
-
+    private ModelMapper taskModelMapper;
 
 
     @PostMapping("/addTask/{userId}")
 
     public ResponseEntity addTask(@Valid @RequestBody TaskDTO taskDTO, @PathVariable long userId) {
 
-        TaskModel taskModel = modelMapper.map(taskDTO, TaskModel.class);
+        TaskModel taskModel = taskModelMapper.map(taskDTO, TaskModel.class);
 
-        taskService.addTask(taskModel , userId);
+        taskService.addTask(taskModel, userId);
 
         return ResponseEntity.ok("Task uploaded successfully");
     }
 
     @GetMapping("/getTaskByID/{whoPostedId}")
     public ResponseEntity getUser(@PathVariable long whoPostedId) {
+
         return ResponseEntity.ok(taskService.getTask(whoPostedId));
+
     }
 
 }

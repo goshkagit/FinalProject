@@ -15,11 +15,12 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@TableGenerator(name = "gen"  ,allocationSize = 100)
 @Table(name = "user_profile_details")
 public class UserProfileModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE , generator = "gen")
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
