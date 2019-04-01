@@ -10,6 +10,7 @@ import com.finalproject.upwork.services.impl.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,29 +29,51 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+
     @PostMapping("/addUser")
-    public ResponseEntity addUser(@Valid @RequestBody UserLoginDTO userLoginModelDTO){
+    public ResponseEntity addUser(@Valid @RequestBody UserLoginDTO userLoginModelDTO) {
 
-           UserLoginModel userLoginModel = modelMapper.map(userLoginModelDTO , UserLoginModel.class);
+        UserLoginModel userLoginModel = modelMapper.map(userLoginModelDTO, UserLoginModel.class);
 
-           userService.addUser(userLoginModel);
+        userService.addUser(userLoginModel);
 
-           return ResponseEntity.ok("Sign up successfully");
+        return ResponseEntity.ok("Sign up successfully");
     }
 
     @PostMapping("/addUserDetails/{loginId}")
-    public ResponseEntity addUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO , @PathVariable long loginId){
+    public ResponseEntity addUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO, @PathVariable long loginId) {
 
-        UserProfileModel userProfileModel = profileModelMapper.map(userProfileModelDTO , UserProfileModel.class);
+        UserProfileModel userProfileModel = profileModelMapper.map(userProfileModelDTO, UserProfileModel.class);
 
-        userService.addUserProfileDetails(userProfileModel , loginId);
+        userService.addUserProfileDetails(userProfileModel, loginId);
 
         return ResponseEntity.ok("Details added successfully");
     }
 
     @GetMapping("/getByID/{profileId}")
-   public ResponseEntity getUser(@PathVariable long profileId) {
-            return ResponseEntity.ok(userService.getProfileById(profileId).toString());
+    public ResponseEntity getUser(@PathVariable long profileId) {
+        return ResponseEntity.ok(userService.getProfileById(profileId));
+    }
+
+    @PutMapping("/updateProfile/{profileId}")
+    public ResponseEntity updateUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO , @PathVariable long profileId){
+
+        UserProfileModel userProfileModel = profileModelMapper.map(userProfileModelDTO, UserProfileModel.class);
+
+        userService.updateProfile(userProfileModel, profileId);
+
+
+        return ResponseEntity.ok("Updated successfully");
+    }
+
+
+    @DeleteMapping("/deleteUser/{userId}")
+    public ResponseEntity deleteUser(@PathVariable long userId) {
+
+        userService.deleteUser(userId);
+
+        return ResponseEntity.ok("User deleted successfully");
     }
 
 }

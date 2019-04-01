@@ -1,11 +1,10 @@
 package com.finalproject.upwork.services;
 
 
-import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
+
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 
-import java.util.List;
 
 
 public interface UserService {
@@ -19,6 +18,10 @@ public interface UserService {
     UserProfileModel getProfileById(long id);
 
     UserLoginModel findByNickname(String nickname);
+
+    void updateProfile(UserProfileModel userProfileModel, long id);
+
+    void deleteUser(long id );
 }
 
 

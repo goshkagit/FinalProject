@@ -70,6 +70,7 @@ public class MapperConfig {
             model.setPortfolio(dto.getPortfolio());
             model.setId(dto.getId());
             model.setSkill(Type.valueOf(dto.getSkill().toUpperCase()));
+
             return model;
 
         }

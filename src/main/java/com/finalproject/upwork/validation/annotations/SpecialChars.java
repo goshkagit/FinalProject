@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpecialChars {
 
-    String message() default "SpecialChars!!";
+    String message() default "Unacceptable chars";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -19,7 +19,7 @@ import javax.validation.Valid;
 public class TaskController {
 
     @Autowired
-    TaskService taskService;
+    private TaskService taskService;
 
     @Autowired
     private ModelMapper taskModelMapper;
@@ -41,6 +41,19 @@ public class TaskController {
 
         return ResponseEntity.ok(taskService.getTask(whoPostedId));
 
+    }
+
+
+
+    @PutMapping("/updateTask/{taskId}")
+    public  ResponseEntity updateTask(@Valid TaskDTO taskDTO  , @PathVariable long taskId){
+
+
+        TaskModel taskModel = taskModelMapper.map(taskDTO, TaskModel.class);
+
+        taskService.updateTask(taskModel , taskId);
+
+        return ResponseEntity.ok("Task updated successfully");
     }
 
 }

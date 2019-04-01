@@ -12,7 +12,6 @@ public class TaskDTO {
 
     private long taskID;
 
-
     @Size(min = 3 , max = 55)
     @NotBlank
     private String topic;
@@ -28,7 +27,6 @@ public class TaskDTO {
     @SpecialChars
     @NotBlank
     private String type;
-
 
     private LocalDate deadline;
 
