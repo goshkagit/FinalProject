@@ -13,7 +13,6 @@ public class UserLoginDTO {
 
     @SpecialChars
     @Size(min = 3 , max = 15)
-    @NotBlank
     private String nickname;
 
     @Size(min = 3)

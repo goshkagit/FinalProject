@@ -18,11 +18,9 @@ public class UserProfileModelDTO {
 
     @SpecialChars
     @Size(min = 3)
-    @NotBlank
     private String name;
 
     @SpecialChars
-    @NotBlank
     private String skill;
 
     @Email

@@ -1,6 +1,7 @@
 package com.finalproject.upwork.validation.validator;
 
 
+import com.finalproject.upwork.exception.SpecialCharsException;
 import com.finalproject.upwork.validation.annotations.SpecialChars;
 
 import javax.validation.ConstraintValidator;
@@ -17,8 +18,16 @@ public class SpecialCharsValidator implements
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        Matcher m = Pattern.compile("[^A-Za-z0-9_]").matcher(s);
-        return ! m.lookingAt();
+
+        if (s == null){
+            throw new NullPointerException();
+        }else {
+            Matcher m = Pattern.compile("[^A-Za-z0-9_]").matcher(s);
+            if(m.lookingAt()){
+                throw new SpecialCharsException();
+            }
+            return !m.lookingAt();
+        }
     }
 
 

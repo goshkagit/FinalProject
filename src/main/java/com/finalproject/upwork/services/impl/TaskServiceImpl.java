@@ -1,11 +1,15 @@
 package com.finalproject.upwork.services.impl;
 
+import com.finalproject.upwork.models.SubmittedModel;
 import com.finalproject.upwork.models.TaskModel;
+import com.finalproject.upwork.repositories.SubmittedRepository;
 import com.finalproject.upwork.repositories.TaskRepository;
 import com.finalproject.upwork.services.TaskService;
 import com.finalproject.upwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -16,6 +20,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    SubmittedRepository submittedRepository;
 
     @Override
     public void addTask(TaskModel taskModel, long userId) {
@@ -44,6 +51,18 @@ public class TaskServiceImpl implements TaskService {
 
         taskRepository.save(model);
 
+    }
+
+    @Override
+    public void deleteTask(long id) {
+
+        TaskModel model = taskRepository.findById(id).get();
+
+        List<SubmittedModel> submitted = submittedRepository.findAllBySubmittedTaskId(model);
+
+        submitted.forEach(SubmittedModel -> submittedRepository.delete(SubmittedModel));
+
+        taskRepository.delete(model);
     }
 
 }

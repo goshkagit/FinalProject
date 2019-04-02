@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,9 +25,8 @@ public class TaskController {
     @Autowired
     private ModelMapper taskModelMapper;
 
-
+    @Secured("ROLE_USER")
     @PostMapping("/addTask/{userId}")
-
     public ResponseEntity addTask(@Valid @RequestBody TaskDTO taskDTO, @PathVariable long userId) {
 
         TaskModel taskModel = taskModelMapper.map(taskDTO, TaskModel.class);
@@ -44,16 +44,23 @@ public class TaskController {
     }
 
 
-
     @PutMapping("/updateTask/{taskId}")
-    public  ResponseEntity updateTask(@Valid TaskDTO taskDTO  , @PathVariable long taskId){
-
+    public ResponseEntity updateTask(@Valid TaskDTO taskDTO, @PathVariable long taskId) {
 
         TaskModel taskModel = taskModelMapper.map(taskDTO, TaskModel.class);
 
-        taskService.updateTask(taskModel , taskId);
+        taskService.updateTask(taskModel, taskId);
 
         return ResponseEntity.ok("Task updated successfully");
+    }
+
+
+    @DeleteMapping("/deleteTask/{taskId}")
+    public ResponseEntity deleteTask(@PathVariable long taskId){
+
+        taskService.deleteTask(taskId);
+
+        return ResponseEntity.ok("Task deleted successfully");
     }
 
 }
