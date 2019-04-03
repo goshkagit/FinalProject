@@ -19,7 +19,6 @@ import java.util.List;
 public class UserFilterServiceImpl implements UserFilterService {
 
 
-
     @Autowired
     private ModelMapper modelMapper;
 
@@ -52,9 +51,8 @@ public class UserFilterServiceImpl implements UserFilterService {
 
     @Override
     public List<UserProfileModel> whereNameAndSkillIs(String name, String skill) {
-        return userProfileRepository.findAllByNameAndSkill(name , Type.valueOf(skill.toUpperCase()));
+        return userProfileRepository.findAllByNameAndSkill(name, Type.valueOf(skill.toUpperCase()));
     }
-
 
 
 }

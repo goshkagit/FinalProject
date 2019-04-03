@@ -16,7 +16,7 @@ public interface UserProfileRepository extends JpaRepository<UserProfileModel, L
 
     List<UserProfileModel> findAllByName(String name);
 
-    List<UserProfileModel> findAllByNameAndSkill(String name , Type skill);
+    List<UserProfileModel> findAllByNameAndSkill(String name, Type skill);
 
 
 }

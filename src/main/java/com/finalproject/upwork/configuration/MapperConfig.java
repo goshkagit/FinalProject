@@ -25,7 +25,6 @@ public class MapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {
-
         return new ModelMapper();
     }
 
@@ -33,6 +32,20 @@ public class MapperConfig {
     public ModelMapper profileModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(profileModelConverter);
+        return modelMapper;
+    }
+
+    @Bean
+    public ModelMapper profileDTOModelMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.addConverter(profileModelDTOConverter);
+        return modelMapper;
+    }
+
+    @Bean
+    public ModelMapper taskDTOModelMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.addConverter(taskModelDTOConverter);
         return modelMapper;
     }
 
@@ -73,6 +86,45 @@ public class MapperConfig {
 
             return model;
 
+        }
+    };
+
+    private Converter<UserProfileModel, UserProfileModelDTO> profileModelDTOConverter = new Converter<UserProfileModel, UserProfileModelDTO>() {
+        @Override
+        public UserProfileModelDTO convert(MappingContext<UserProfileModel, UserProfileModelDTO> mappingContext) {
+
+
+            UserProfileModel model = mappingContext.getSource();
+
+            UserProfileModelDTO dto = new UserProfileModelDTO();
+
+            dto.setName(model.getName());
+            dto.setSurname(model.getSurname());
+            dto.setEmail(model.getEmail());
+            dto.setPortfolio(model.getPortfolio());
+            dto.setId(model.getId());
+            dto.setSkill(model.getSkill().toString().toLowerCase());
+
+            return dto;
+
+        }
+    };
+    private Converter<TaskModel, TaskDTO> taskModelDTOConverter = new Converter<TaskModel, TaskDTO>() {
+        @Override
+        public TaskDTO convert(MappingContext<TaskModel, TaskDTO> mappingContext) {
+
+            TaskModel model = mappingContext.getSource();
+
+            TaskDTO dto = new TaskDTO();
+
+            dto.setTopic(model.getTopic());
+            dto.setDeadline(model.getDeadline());
+            dto.setDescription(model.getDescription());
+            dto.setPayment(model.getPayment());
+            dto.setType(model.getType().toString().toLowerCase());
+            dto.setHardness(model.getHardness().toString().toLowerCase());
+
+            return dto;
         }
     };
 

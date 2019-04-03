@@ -15,32 +15,32 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@TableGenerator(name = "gen"  ,allocationSize = 100)
+@TableGenerator(name = "gen", allocationSize = 100)
 @Table(name = "user_profile_details")
 public class UserProfileModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE , generator = "gen")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gen")
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId" , referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private UserLoginModel userId;
 
-    @Column(name = "name" , nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "skill" , nullable = false)
+    @Column(name = "skill", nullable = false)
     @Enumerated(EnumType.STRING)
     private Type skill;
 
     @Column(name = "portfolio")
     private String portfolio;
 
-    @Column(name = "surname" )
+    @Column(name = "surname")
     private String surname;
 
-    @Column(name = "email", unique = true , nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
 

@@ -18,7 +18,6 @@ public class TaskFilterServiceImpl implements TaskFilterService {
     private TaskRepository taskRepository;
 
 
-
     @Override
     public List<TaskModel> whereTypeIs(String type) {
         return taskRepository.findAllByType(Type.valueOf(type.toUpperCase()));
@@ -26,17 +25,17 @@ public class TaskFilterServiceImpl implements TaskFilterService {
 
     @Override
     public List<TaskModel> whereTypeAndHardnessIs(String type, String hardness) {
-        return taskRepository.findAllByTypeAndHardness(Type.valueOf(type.toUpperCase()) , Hardness.valueOf(hardness.toUpperCase()));
+        return taskRepository.findAllByTypeAndHardness(Type.valueOf(type.toUpperCase()), Hardness.valueOf(hardness.toUpperCase()));
     }
 
     @Override
     public List<TaskModel> whereTypeAndPaymentIs(String type, int price) {
-        return taskRepository.findAllByTypeAndPayment(Type.valueOf(type.toUpperCase()) , price);
+        return taskRepository.findAllByTypeAndPayment(Type.valueOf(type.toUpperCase()), price);
     }
 
     @Override
     public List<TaskModel> whereTypeAndDeadlineIs(String type, LocalDate deadline) {
-        return taskRepository.findAllByTypeAndDeadline(Type.valueOf(type.toUpperCase()) , deadline);
+        return taskRepository.findAllByTypeAndDeadline(Type.valueOf(type.toUpperCase()), deadline);
     }
 
     @Override
@@ -56,42 +55,42 @@ public class TaskFilterServiceImpl implements TaskFilterService {
 
     @Override
     public List<TaskModel> wherePaymentIs(int price) {
-        return  taskRepository.findAllByPayment(price);
+        return taskRepository.findAllByPayment(price);
     }
 
     @Override
     public List<TaskModel> wherePaymentAndDeadlineIs(int price, LocalDate deadline) {
-        return taskRepository.findAllByPaymentAndDeadline(price , deadline);
+        return taskRepository.findAllByPaymentAndDeadline(price, deadline);
     }
 
     @Override
     public List<TaskModel> whereDeadlineIs(LocalDate deadline) {
-        return  taskRepository.findAllByDeadline(deadline);
+        return taskRepository.findAllByDeadline(deadline);
     }
 
     @Override
     public List<TaskModel> whereTypeAndPaymentAndHardnessIs(String type, int price, String hardness) {
-        return taskRepository.findAllByTypeAndPaymentAndHardness(Type.valueOf(type.toUpperCase()) , price , Hardness.valueOf(hardness.toUpperCase()));
+        return taskRepository.findAllByTypeAndPaymentAndHardness(Type.valueOf(type.toUpperCase()), price, Hardness.valueOf(hardness.toUpperCase()));
     }
 
     @Override
     public List<TaskModel> whereTypeAndPaymentAndDeadlineIs(String type, int price, LocalDate deadline) {
-        return taskRepository.findAllByTypeAndPaymentAndDeadline(Type.valueOf(type.toUpperCase()) , price , deadline);
+        return taskRepository.findAllByTypeAndPaymentAndDeadline(Type.valueOf(type.toUpperCase()), price, deadline);
     }
 
     @Override
     public List<TaskModel> wherePaymentAndDeadlineAndHardnessIs(int price, LocalDate deadline, String hardness) {
-        return taskRepository.findAllByPaymentAndDeadlineAndHardness( price , deadline ,Hardness.valueOf(hardness.toUpperCase()));
+        return taskRepository.findAllByPaymentAndDeadlineAndHardness(price, deadline, Hardness.valueOf(hardness.toUpperCase()));
     }
 
     @Override
     public List<TaskModel> whereTypeAndDeadlineAndHardnessIs(String type, LocalDate deadline, String hardness) {
-        return taskRepository.findAllByTypeAndDeadlineAndHardness( Type.valueOf(type.toUpperCase()) , deadline ,Hardness.valueOf(hardness.toUpperCase()));
+        return taskRepository.findAllByTypeAndDeadlineAndHardness(Type.valueOf(type.toUpperCase()), deadline, Hardness.valueOf(hardness.toUpperCase()));
     }
 
     @Override
     public List<TaskModel> whereTypeAndPaymentAndHardnessAndDeadlineIs(String type, int price, String hardness, LocalDate deadline) {
-        return taskRepository.findAllByTypeAndPaymentAndHardnessAndDeadline( Type.valueOf(type.toUpperCase()) , price ,Hardness.valueOf(hardness.toUpperCase()) , deadline);
+        return taskRepository.findAllByTypeAndPaymentAndHardnessAndDeadline(Type.valueOf(type.toUpperCase()), price, Hardness.valueOf(hardness.toUpperCase()), deadline);
 
     }
 

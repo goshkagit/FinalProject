@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@Secured(value = "ROLE_USER")
 public class TaskController {
 
     @Autowired
@@ -22,7 +23,10 @@ public class TaskController {
     @Autowired
     private ModelMapper taskModelMapper;
 
-    @Secured("ROLE_USER")
+    @Autowired
+    private ModelMapper taskDTOModelMapper;
+
+
     @PostMapping("/addTask/{userId}")
     public ResponseEntity addTask(@Valid @RequestBody TaskDTO taskDTO, @PathVariable long userId) {
 
@@ -33,6 +37,7 @@ public class TaskController {
         return ResponseEntity.ok("Task uploaded successfully");
     }
 
+
     @GetMapping("/getTaskByID/{whoPostedId}")
     public ResponseEntity getUser(@PathVariable long whoPostedId) {
 
@@ -41,7 +46,10 @@ public class TaskController {
         if (task == null) {
             throw new NotFoundException("There is no task with id :" + whoPostedId);
         }
-        return ResponseEntity.ok(task);
+
+        TaskDTO dto = taskDTOModelMapper.map(task, TaskDTO.class);
+
+        return ResponseEntity.ok(dto);
 
     }
 

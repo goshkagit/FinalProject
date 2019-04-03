@@ -11,6 +11,7 @@ import com.finalproject.upwork.services.impl.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,9 @@ public class UserController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ModelMapper profileDTOModelMapper;
 
     @Autowired
     private UserService userService;
@@ -51,15 +55,18 @@ public class UserController {
         return ResponseEntity.ok("Details added successfully");
     }
 
+    @Secured(value = "ROLE_USER")
     @GetMapping("/getByID/{profileId}")
     public ResponseEntity getUser(@PathVariable long profileId) {
         UserProfileModel profile = userService.getProfileById(profileId);
         if (profile == null) {
             throw new NotFoundException("There is no user with id :" + profileId);
         }
-            return ResponseEntity.ok(profile);
+        UserProfileModelDTO dto = profileDTOModelMapper.map(profile, UserProfileModelDTO.class);
+        return ResponseEntity.ok(dto);
     }
 
+    @Secured(value = "ROLE_USER")
     @PutMapping("/updateProfile/{profileId}")
     public ResponseEntity updateUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO, @PathVariable long profileId) {
 
@@ -74,6 +81,7 @@ public class UserController {
     }
 
 
+    @Secured(value = "ROLE_ADMIN")
     @DeleteMapping("/deleteUser/{userId}")
     public ResponseEntity deleteUser(@PathVariable long userId) {
 

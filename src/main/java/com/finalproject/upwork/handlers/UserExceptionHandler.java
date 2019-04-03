@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
-import java.util.NoSuchElementException;
-
 @RestControllerAdvice
 @EnableWebMvc
 public class UserExceptionHandler {
@@ -20,13 +18,6 @@ public class UserExceptionHandler {
     public ResponseEntity WrongArgumentExceptionHandler(WrongArgumentException exc) {
 
         return ResponseEntity.ok("Wrong argument");
-
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity NoSuchElementExceptionHandler(NoSuchElementException exc) {
-
-        return ResponseEntity.ok("Inexistent element");
 
     }
 

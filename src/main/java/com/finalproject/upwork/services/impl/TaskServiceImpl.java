@@ -43,8 +43,8 @@ public class TaskServiceImpl implements TaskService {
 
         TaskModel model = taskRepository.findById(taskId).orElse(null);
 
-        if(model == null){
-            throw new NotFoundException("There is no task with id :"+ taskId);
+        if (model == null) {
+            throw new NotFoundException("There is no task with id :" + taskId);
         }
 
         model.setTopic(model.getTopic());
@@ -63,8 +63,8 @@ public class TaskServiceImpl implements TaskService {
 
         TaskModel taskModel = taskRepository.findById(id).orElse(null);
 
-        if(taskModel == null){
-            throw new NotFoundException("There is no task with id :"+ id);
+        if (taskModel == null) {
+            throw new NotFoundException("There is no task with id :" + id);
         }
         List<SubmittedModel> submitted = submittedRepository.findAllBySubmittedTaskId(taskModel);
 
