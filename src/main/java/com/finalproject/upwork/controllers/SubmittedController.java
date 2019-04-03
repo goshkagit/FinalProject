@@ -16,7 +16,7 @@ public class SubmittedController {
 
 
     @PostMapping("/submit/{taskId}/{userId}")
-    public ResponseEntity submit(@PathVariable long taskId , @PathVariable  long userId){
+    public ResponseEntity submit(@PathVariable long taskId, @PathVariable long userId) {
 
         submitService.submit(taskId, userId);
 

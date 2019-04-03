@@ -10,11 +10,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Constraint(validatedBy = SpecialCharsValidator.class)
-@Target( { ElementType.FIELD })
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpecialChars {
 
     String message() default "Unacceptable chars";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

@@ -1,17 +1,15 @@
 package com.finalproject.upwork.services;
 
 
-
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
-
 
 
 public interface UserService {
 
     void addUser(UserLoginModel userLoginModel);
 
-    void addUserProfileDetails(UserProfileModel userProfileModel  , long id);
+    void addUserProfileDetails(UserProfileModel userProfileModel, long id);
 
     UserLoginModel getLoginById(long id);
 
@@ -21,7 +19,7 @@ public interface UserService {
 
     void updateProfile(UserProfileModel userProfileModel, long id);
 
-    void deleteUser(long id );
+    void deleteUser(long id);
 }
 
 

@@ -19,17 +19,16 @@ public class SpecialCharsValidator implements
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
 
-        if (s == null){
+        if (s == null) {
             throw new NullPointerException();
-        }else {
+        } else {
             Matcher m = Pattern.compile("[^A-Za-z0-9_]").matcher(s);
-            if(m.lookingAt()){
+            if (m.lookingAt()) {
                 throw new SpecialCharsException();
             }
             return !m.lookingAt();
         }
     }
-
 
 
 }

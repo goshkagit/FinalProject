@@ -13,38 +13,37 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@TableGenerator(name = "gen"  ,allocationSize = 100)
+@TableGenerator(name = "gen", allocationSize = 100)
 @Table(name = "tasks")
 public class TaskModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE ,generator = "gen")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gen")
     private long taskId;
 
-    @Column(name = "topic", unique = true , nullable = false)
-    private String topic;
+    @Column(name = "topic", unique = true, nullable = false)
+    private java.lang.String topic;
 
-    @Column(name = "description" , nullable = false)
-    private String description;
+    @Column(name = "description", nullable = false)
+    private java.lang.String description;
 
-    @Column(name = "hardness" , nullable = false)
+    @Column(name = "hardness", nullable = false)
     @Enumerated(EnumType.STRING)
     private Hardness hardness;
 
-    @Column(name = "type" , nullable = false)
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private Type type;
 
     @Column(name = "deadline")
     private LocalDate deadline;
 
-    @Column(name = "payment" , nullable = false)
+    @Column(name = "payment", nullable = false)
     private int payment;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "userId" , nullable = false)
+    @JoinColumn(referencedColumnName = "userId", nullable = false)
     private UserProfileModel whoPosted;
-
 
 
 }

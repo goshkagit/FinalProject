@@ -7,9 +7,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class UpworkApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext run = SpringApplication.run(UpworkApplication.class, args);
+    public static void main(String[] args) {
+        ConfigurableApplicationContext run = SpringApplication.run(UpworkApplication.class, args);
 
-	}
+    }
 
 }

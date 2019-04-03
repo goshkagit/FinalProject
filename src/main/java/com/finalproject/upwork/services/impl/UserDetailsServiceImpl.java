@@ -1,5 +1,6 @@
 package com.finalproject.upwork.services.impl;
 
+import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserPrincipal;
 import com.finalproject.upwork.repositories.UserLoginRepository;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserService userService;
@@ -20,8 +21,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         UserLoginModel userLoginModel = userService.findByNickname(s);
-        if(userLoginModel == null){
-            throw new UsernameNotFoundException(s);
+        if (userLoginModel == null) {
+            throw new NotFoundException("There is no user with username: " + s);
         }
         return new UserPrincipal(userLoginModel);
     }

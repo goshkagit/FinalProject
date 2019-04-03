@@ -1,6 +1,8 @@
 package com.finalproject.upwork.services.impl;
 
 
+import com.finalproject.upwork.exception.NotFoundException;
+import com.finalproject.upwork.exception.SpecialCharsException;
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.models.enums.Type;
@@ -58,9 +60,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserProfileModel getProfileById(long id) {
-        return userProfileRepository.findById(id).get();
+        return userProfileRepository.findById(id).orElse(null);
     }
-
 
     @Override
     public UserLoginModel findByNickname(String nickname) {
@@ -84,9 +85,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(long id) {
 
-        UserLoginModel loginModel = userLoginRepository.findById(id).get();
-        UserProfileModel profileModel = userProfileRepository.findById(id).get();
+        UserLoginModel loginModel = userLoginRepository.findById(id).orElse(null);
+        UserProfileModel profileModel = userProfileRepository.findById(id).orElse(null);
 
+        if (loginModel == null || profileModel == null) {
+            throw new NotFoundException("There is no user with id :" + id);
+        }
         submittedRepository.findAllBySubmittedUsersId(profileModel).forEach(submittedModel -> submittedRepository.delete(submittedModel));
 
         taskRepository.findAllByWhoPosted(profileModel).forEach(taskModel -> taskRepository.delete(taskModel));
@@ -99,7 +103,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserLoginModel getLoginById(long loginId) {
-        return userLoginRepository.findById(loginId).get();
+        return userLoginRepository.findById(loginId).orElse(null);
     }
 
 

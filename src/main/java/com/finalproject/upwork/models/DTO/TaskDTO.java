@@ -12,11 +12,11 @@ public class TaskDTO {
 
     private long taskID;
 
-    @Size(min = 3 , max = 55)
+    @Size(min = 3, max = 55)
     @SpecialChars
     private String topic;
 
-    @Size(min = 3 , max = 350)
+    @Size(min = 3, max = 350)
     @NotBlank
     private String description;
 

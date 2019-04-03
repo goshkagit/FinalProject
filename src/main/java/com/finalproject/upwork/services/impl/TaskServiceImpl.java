@@ -1,5 +1,6 @@
 package com.finalproject.upwork.services.impl;
 
+import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.models.SubmittedModel;
 import com.finalproject.upwork.models.TaskModel;
 import com.finalproject.upwork.repositories.SubmittedRepository;
@@ -34,20 +35,24 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskModel getTask(long id) {
-        return taskRepository.findById(id).get();
+        return taskRepository.findById(id).orElse(null);
     }
 
     @Override
     public void updateTask(TaskModel taskModel, long taskId) {
 
-        TaskModel model = taskRepository.findById(taskId).get();
+        TaskModel model = taskRepository.findById(taskId).orElse(null);
 
-        model.setTopic(taskModel.getTopic());
-        model.setDeadline(taskModel.getDeadline());
-        model.setDescription(taskModel.getDescription());
-        model.setPayment(taskModel.getPayment());
-        model.setType(taskModel.getType());
-        model.setHardness(taskModel.getHardness());
+        if(model == null){
+            throw new NotFoundException("There is no task with id :"+ taskId);
+        }
+
+        model.setTopic(model.getTopic());
+        model.setDeadline(model.getDeadline());
+        model.setDescription(model.getDescription());
+        model.setPayment(model.getPayment());
+        model.setType(model.getType());
+        model.setHardness(model.getHardness());
 
         taskRepository.save(model);
 
@@ -56,13 +61,16 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTask(long id) {
 
-        TaskModel model = taskRepository.findById(id).get();
+        TaskModel taskModel = taskRepository.findById(id).orElse(null);
 
-        List<SubmittedModel> submitted = submittedRepository.findAllBySubmittedTaskId(model);
+        if(taskModel == null){
+            throw new NotFoundException("There is no task with id :"+ id);
+        }
+        List<SubmittedModel> submitted = submittedRepository.findAllBySubmittedTaskId(taskModel);
 
         submitted.forEach(SubmittedModel -> submittedRepository.delete(SubmittedModel));
 
-        taskRepository.delete(model);
+        taskRepository.delete(taskModel);
     }
 
 }

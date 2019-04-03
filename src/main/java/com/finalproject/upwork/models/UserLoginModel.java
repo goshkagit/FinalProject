@@ -13,21 +13,20 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@TableGenerator(name = "gen"  ,allocationSize = 100)
+@TableGenerator(name = "gen", allocationSize = 100)
 @Table(name = "users_login")
 public class UserLoginModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE , generator = "gen")
-    @Column( name = "id")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gen")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "nickname", unique = true , nullable = false)
+    @Column(name = "nickname", unique = true, nullable = false)
     private String nickname;
 
-    @Column(name = "password" , nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
-
 
 
 }

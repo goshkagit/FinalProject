@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserLoginRepository extends JpaRepository<UserLoginModel , Long> {
+public interface UserLoginRepository extends JpaRepository<UserLoginModel, Long> {
 
     UserLoginModel findByNickname(String nickname);
 

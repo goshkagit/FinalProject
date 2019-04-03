@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SubmittedRepository extends JpaRepository<SubmittedModel, Long>{
+public interface SubmittedRepository extends JpaRepository<SubmittedModel, Long> {
 
     List<SubmittedModel> findAllBySubmittedUsersId(UserProfileModel userProfileModel);
 

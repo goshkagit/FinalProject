@@ -27,7 +27,7 @@ public class UserProfileModelDTO {
     @NotBlank
     private String email;
 
-    @Size(min = 3 , max = 100)
+    @Size(min = 3, max = 100)
     private String portfolio;
 
 

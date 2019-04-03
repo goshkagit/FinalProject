@@ -10,10 +10,13 @@ import java.util.List;
 
 
 @Repository
-public interface UserProfileRepository extends JpaRepository<UserProfileModel , Long> {
+public interface UserProfileRepository extends JpaRepository<UserProfileModel, Long> {
 
     List<UserProfileModel> findAllBySkill(Type skill);
 
+    List<UserProfileModel> findAllByName(String name);
+
+    List<UserProfileModel> findAllByNameAndSkill(String name , Type skill);
 
 
 }

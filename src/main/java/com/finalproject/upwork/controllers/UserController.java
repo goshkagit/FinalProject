@@ -1,6 +1,7 @@
 package com.finalproject.upwork.controllers;
 
 
+import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.models.DTO.UserLoginDTO;
 import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
 import com.finalproject.upwork.models.UserLoginModel;
@@ -30,7 +31,6 @@ public class UserController {
     private UserService userService;
 
 
-
     @PostMapping("/addUser")
     public ResponseEntity addUser(@Valid @RequestBody UserLoginDTO userLoginModelDTO) {
 
@@ -53,16 +53,22 @@ public class UserController {
 
     @GetMapping("/getByID/{profileId}")
     public ResponseEntity getUser(@PathVariable long profileId) {
-        return ResponseEntity.ok(userService.getProfileById(profileId));
+        UserProfileModel profile = userService.getProfileById(profileId);
+        if (profile == null) {
+            throw new NotFoundException("There is no user with id :" + profileId);
+        }
+            return ResponseEntity.ok(profile);
     }
 
     @PutMapping("/updateProfile/{profileId}")
-    public ResponseEntity updateUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO , @PathVariable long profileId){
+    public ResponseEntity updateUser(@Valid @RequestBody UserProfileModelDTO userProfileModelDTO, @PathVariable long profileId) {
 
         UserProfileModel userProfileModel = profileModelMapper.map(userProfileModelDTO, UserProfileModel.class);
 
+        if (userProfileModel == null) {
+            throw new NotFoundException("There is no user with id :" + profileId);
+        }
         userService.updateProfile(userProfileModel, profileId);
-
 
         return ResponseEntity.ok("Updated successfully");
     }

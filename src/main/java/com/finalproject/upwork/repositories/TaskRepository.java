@@ -11,41 +11,39 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface TaskRepository extends JpaRepository<TaskModel , Long> {
+public interface TaskRepository extends JpaRepository<TaskModel, Long> {
 
     List<TaskModel> findAllByWhoPosted(UserProfileModel userProfileModel);
 
     List<TaskModel> findAllByType(Type type);
 
-    List<TaskModel> findAllByTypeAndHardness(Type type , Hardness hardness);
+    List<TaskModel> findAllByTypeAndHardness(Type type, Hardness hardness);
 
-    List<TaskModel> findAllByTypeAndPayment(Type type , int price);
+    List<TaskModel> findAllByTypeAndPayment(Type type, int price);
 
-    List<TaskModel> findAllByTypeAndDeadline(Type type , LocalDate deadline);
+    List<TaskModel> findAllByTypeAndDeadline(Type type, LocalDate deadline);
 
     List<TaskModel> findAllByHardness(Hardness hardness);
 
-    List<TaskModel> findAllByHardnessAndDeadline(Hardness hardness , LocalDate deadline);
+    List<TaskModel> findAllByHardnessAndDeadline(Hardness hardness, LocalDate deadline);
 
-    List<TaskModel> findAllByHardnessAndPayment(Hardness hardness , int price);
+    List<TaskModel> findAllByHardnessAndPayment(Hardness hardness, int price);
 
     List<TaskModel> findAllByPayment(int price);
 
-    List<TaskModel> findAllByPaymentAndDeadline(int price , LocalDate deadline);
+    List<TaskModel> findAllByPaymentAndDeadline(int price, LocalDate deadline);
 
     List<TaskModel> findAllByDeadline(LocalDate deadline);
 
-    List<TaskModel> findAllByTypeAndPaymentAndHardness(Type type , int price , Hardness hardness);
+    List<TaskModel> findAllByTypeAndPaymentAndHardness(Type type, int price, Hardness hardness);
 
-    List<TaskModel> findAllByTypeAndPaymentAndDeadline(Type type , int price , LocalDate deadline);
+    List<TaskModel> findAllByTypeAndPaymentAndDeadline(Type type, int price, LocalDate deadline);
 
-    List<TaskModel> findAllByPaymentAndDeadlineAndHardness( int price ,LocalDate deadline, Hardness hardness);
+    List<TaskModel> findAllByPaymentAndDeadlineAndHardness(int price, LocalDate deadline, Hardness hardness);
 
-    List<TaskModel> findAllByTypeAndDeadlineAndHardness( Type type ,LocalDate deadline, Hardness hardness);
+    List<TaskModel> findAllByTypeAndDeadlineAndHardness(Type type, LocalDate deadline, Hardness hardness);
 
-    List<TaskModel> findAllByTypeAndPaymentAndHardnessAndDeadline(Type type , int price , Hardness hardness , LocalDate deadline);
-
-
+    List<TaskModel> findAllByTypeAndPaymentAndHardnessAndDeadline(Type type, int price, Hardness hardness, LocalDate deadline);
 
 
 }

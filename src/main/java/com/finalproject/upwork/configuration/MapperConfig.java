@@ -17,26 +17,26 @@ public class MapperConfig {
 
 
     @Bean
-    public ModelMapper taskModelMapper(){
+    public ModelMapper taskModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(taskModelConverter);
         return modelMapper;
     }
 
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
 
         return new ModelMapper();
     }
 
     @Bean
-    public ModelMapper profileModelMapper(){
+    public ModelMapper profileModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(profileModelConverter);
         return modelMapper;
     }
 
-  private  Converter<TaskDTO , TaskModel> taskModelConverter = new Converter<TaskDTO, TaskModel>() {
+    private Converter<TaskDTO, TaskModel> taskModelConverter = new Converter<TaskDTO, TaskModel>() {
 
         @Override
         public TaskModel convert(MappingContext<TaskDTO, TaskModel> mappingContext) {
@@ -56,11 +56,11 @@ public class MapperConfig {
         }
     };
 
-  private   Converter<UserProfileModelDTO, UserProfileModel> profileModelConverter = new Converter<UserProfileModelDTO, UserProfileModel>() {
+    private Converter<UserProfileModelDTO, UserProfileModel> profileModelConverter = new Converter<UserProfileModelDTO, UserProfileModel>() {
         @Override
         public UserProfileModel convert(MappingContext<UserProfileModelDTO, UserProfileModel> mappingContext) {
 
-            UserProfileModelDTO dto  = mappingContext.getSource();
+            UserProfileModelDTO dto = mappingContext.getSource();
 
             UserProfileModel model = new UserProfileModel();
 
@@ -75,7 +75,6 @@ public class MapperConfig {
 
         }
     };
-
 
 
 }

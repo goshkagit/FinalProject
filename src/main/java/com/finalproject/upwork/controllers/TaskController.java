@@ -1,14 +1,11 @@
 package com.finalproject.upwork.controllers;
 
 
+import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.models.DTO.TaskDTO;
 import com.finalproject.upwork.models.TaskModel;
-import com.finalproject.upwork.models.enums.Hardness;
-import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.services.TaskService;
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -39,7 +36,12 @@ public class TaskController {
     @GetMapping("/getTaskByID/{whoPostedId}")
     public ResponseEntity getUser(@PathVariable long whoPostedId) {
 
-        return ResponseEntity.ok(taskService.getTask(whoPostedId));
+        TaskModel task = taskService.getTask(whoPostedId);
+
+        if (task == null) {
+            throw new NotFoundException("There is no task with id :" + whoPostedId);
+        }
+        return ResponseEntity.ok(task);
 
     }
 
@@ -49,6 +51,9 @@ public class TaskController {
 
         TaskModel taskModel = taskModelMapper.map(taskDTO, TaskModel.class);
 
+        if (taskModel == null) {
+            throw new NotFoundException("There is no task with id :" + taskId);
+        }
         taskService.updateTask(taskModel, taskId);
 
         return ResponseEntity.ok("Task updated successfully");
@@ -56,7 +61,7 @@ public class TaskController {
 
 
     @DeleteMapping("/deleteTask/{taskId}")
-    public ResponseEntity deleteTask(@PathVariable long taskId){
+    public ResponseEntity deleteTask(@PathVariable long taskId) {
 
         taskService.deleteTask(taskId);
 
