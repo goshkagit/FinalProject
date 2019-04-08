@@ -4,7 +4,9 @@ package com.finalproject.upwork.services.impl;
 import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.exception.SpecialCharsException;
 import com.finalproject.upwork.models.UserLoginModel;
+import com.finalproject.upwork.models.UserPrincipal;
 import com.finalproject.upwork.models.UserProfileModel;
+import com.finalproject.upwork.models.enums.Roles;
 import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.repositories.SubmittedRepository;
 import com.finalproject.upwork.repositories.TaskRepository;
@@ -38,11 +40,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     public void addUser(UserLoginModel userLoginModel) {
 
         String password = userLoginModel.getPassword();
+
+        userLoginModel.setRole(Roles.ROLE_USER);
 
         userLoginModel.setPassword(passwordEncoder.encode(password));
 
@@ -90,7 +96,7 @@ public class UserServiceImpl implements UserService {
         UserProfileModel profileModel = userProfileRepository.findById(profileId).orElse(null);
 
         if (loginModel == null) {
-            throw new NotFoundException("There is no user with login id :" + loginId);
+            throw new NotFoundException("There is no user with login id : " + loginId);
         } else if (profileModel == null) {
             throw new NotFoundException("There is no user with profile id :" + profileId);
         }
@@ -102,6 +108,18 @@ public class UserServiceImpl implements UserService {
 
         userLoginRepository.delete(loginModel);
 
+    }
+
+    @Override
+    public void grandAdmin(String nickname) {
+        UserLoginModel userLoginModel = userLoginRepository.findByNickname(nickname);
+
+        if (userLoginModel == null) {
+            throw new NotFoundException("There is no user with nickname : " + nickname);
+        }
+        userLoginModel.setRole(Roles.ROLE_ADMIN);
+        userLoginRepository.save(userLoginModel);
+        userDetailsService.loadUserByUsername(nickname);
     }
 
     @Override

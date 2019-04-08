@@ -68,7 +68,7 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Task updated successfully");
     }
 
-
+@Secured("ROLE_ADMIN")
     @DeleteMapping("/deleteTask/{taskId}")
     public ResponseEntity deleteTask(@PathVariable long taskId) {
 

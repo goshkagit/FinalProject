@@ -12,7 +12,7 @@ public enum Type {
     C_PLUS_PLUS,
     C,
     C_SHARP,
-    PROMOTION;
+    PROMOTION
 
 
 }

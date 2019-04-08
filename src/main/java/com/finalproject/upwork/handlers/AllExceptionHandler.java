@@ -72,7 +72,7 @@ public class AllExceptionHandler {
     @ExceptionHandler(CantSubmitException.class)
     public ResponseEntity SubmitHandler(CantSubmitException exc) {
 
-        return ResponseEntity.ok("You cant submit to the task that you posted ");
+        return ResponseEntity.ok("You cant submit or unsubmit to the task that you posted ");
 
     }
 

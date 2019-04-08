@@ -22,14 +22,13 @@ public class UserPrincipal implements UserDetails {
 
         final List<GrantedAuthority> authorities = new ArrayList<>();
 
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority(userLoginModel.getRole().toString()));
 
         return authorities;
     }
 
     @Override
     public String getPassword() {
-
         return userLoginModel.getPassword();
     }
 

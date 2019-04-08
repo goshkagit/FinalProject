@@ -1,5 +1,6 @@
 package com.finalproject.upwork.models;
 
+import com.finalproject.upwork.models.enums.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,10 @@ public class UserLoginModel implements Serializable {
 
     @Column(name = "nickname", unique = true, nullable = false)
     private String nickname;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
     @Column(name = "password", nullable = false)
     private String password;

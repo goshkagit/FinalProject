@@ -60,6 +60,7 @@ public class UserControllerTest {
     private UserLoginRepository userLoginRepository;
 
     @Test
+    @Transactional
     public void addUserLogin() throws Exception {
 
         UserLoginDTO userLoginDTO = new UserLoginDTO();
@@ -67,6 +68,7 @@ public class UserControllerTest {
         userLoginDTO.setId(1);
         userLoginDTO.setNickname("Johny22");
         userLoginDTO.setPassword("qwerty12345");
+
 
         String json = objectMapper.writeValueAsString(userLoginDTO);
 
@@ -108,7 +110,6 @@ public class UserControllerTest {
         assertEquals(mvcResult.getResponse().getStatus(), 201);
     }
 
-
     @Before
     public void setup() {
         mvc = MockMvcBuilders
@@ -116,7 +117,6 @@ public class UserControllerTest {
                 .apply(springSecurity())
                 .build();
     }
-
     @WithMockUser("Johny22")
     @Test
     @Transactional
@@ -167,8 +167,8 @@ public class UserControllerTest {
         userProfileModelDTO.setName("Maria");
         userProfileModelDTO.setSurname("Conker");
         userProfileModelDTO.setEmail("maria214@gmail.com");
-        userProfileModelDTO.setSkill("design");
-        userProfileModelDTO.setPortfolio("https://www.google2.com");
+        userProfileModelDTO.setSkill("java");
+        userProfileModelDTO.setPortfolio("https://www.google3.com");
 
         String json = objectMapper.writeValueAsString(userProfileModelDTO);
 
@@ -185,8 +185,9 @@ public class UserControllerTest {
 
     }
 
+
     @Test
-    @WithMockUser("Johny22")
+    @WithMockUser("JohnyAdmin")
     @Transactional
     public void deleteUser() throws Exception {
 
@@ -217,7 +218,7 @@ public class UserControllerTest {
 
         MvcResult mvcResult = mvc.perform(requestBuilder).andReturn();
 
-        assertEquals(mvcResult.getResponse().getStatus(), 200);
+        assertEquals(mvcResult.getResponse().getStatus(), 403);
         assertEquals(mvcResult.getResponse().getContentAsString(), "User deleted successfully");
 
 

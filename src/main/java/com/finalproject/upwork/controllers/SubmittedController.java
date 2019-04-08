@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,19 +26,19 @@ public class SubmittedController {
     ModelMapper modelMapper;
 
 
-    @PostMapping("/submit/{taskId}/{userId}")
-    public ResponseEntity submit(@PathVariable long taskId, @PathVariable long userId) {
+    @PostMapping("/submit/{taskId}/{profileId}")
+    public ResponseEntity submit(@PathVariable long taskId, @PathVariable long profileId) {
 
-        submitService.submit(taskId, userId);
+        submitService.submit(taskId, profileId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Submitted");
     }
 
 
-    @GetMapping("/submissions/{userId}")
-    public ResponseEntity getAllSubmissions(@PathVariable long userId) {
+    @GetMapping("/submissions/{profileId}")
+    public ResponseEntity getAllSubmissions(@PathVariable long profileId) {
 
-        List<SubmittedModel> all = submitService.findAllBySubmittedUsersId(userId);
+        List<SubmittedModel> all = submitService.findAllBySubmittedUsersId(profileId);
         if (all.isEmpty()) {
             throw new NotFoundException("Your not submit for any work yet");
         }
@@ -66,6 +63,14 @@ public class SubmittedController {
                 .map(SubmittedModel -> modelMapper.map(SubmittedModel, GetSubmissionDTO.class))
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(allDTO);
+    }
+
+    @DeleteMapping("/unSubmit/{taskId}/{profileId}")
+    public ResponseEntity unSubmit(@PathVariable long taskId , @PathVariable long profileId) {
+
+      submitService.unSubmit(taskId , profileId);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Unsubmitted successfully");
     }
 
 }

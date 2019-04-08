@@ -83,7 +83,7 @@ public class UserController {
     }
 
 
-    @Secured(value = "ROLE_USER")
+    @Secured(value = "ROLE_ADMIN")
     @DeleteMapping("/deleteUser/{loginId}/{profileId}")
     public ResponseEntity deleteUser(@PathVariable long loginId, @PathVariable long profileId) {
 
@@ -91,5 +91,15 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
     }
+
+    @Secured(value = "ROLE_ADMIN")
+    @PutMapping("/adminUser/{nickname}")
+    public ResponseEntity deleteUser(@PathVariable String nickname) {
+
+        userService.grandAdmin(nickname);
+
+        return ResponseEntity.status(HttpStatus.OK).body(nickname+" is admin now");
+    }
+
 
 }

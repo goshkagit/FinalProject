@@ -9,6 +9,8 @@ public interface SubmitService {
 
     void submit(long taskId, long userId);
 
+    void unSubmit(long taskId, long userId);
+
     List<SubmittedModel> findAllBySubmittedUsersId(long userId);
 
     List<SubmittedModel> findAllBySubmittedTaskId(long taskId);

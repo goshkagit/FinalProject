@@ -20,6 +20,8 @@ public interface UserService {
     void updateProfile(UserProfileModel userProfileModel, long id);
 
     void deleteUser(long loginId, long profileId);
+
+    void grandAdmin(String nickname);
 }
 
 

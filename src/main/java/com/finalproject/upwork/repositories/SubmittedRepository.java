@@ -15,4 +15,5 @@ public interface SubmittedRepository extends JpaRepository<SubmittedModel, Long>
 
     List<SubmittedModel> findAllBySubmittedTaskId(TaskModel taskModel);
 
+    SubmittedModel findAllBySubmittedTaskIdAndSubmittedUsersId(TaskModel taskModel , UserProfileModel userProfileModel);
 }

@@ -64,6 +64,25 @@ public class SubmitServiceImpl implements SubmitService {
     }
 
     @Override
+    public void unSubmit(long taskId, long userId) {
+        TaskModel task = taskService.getTask(taskId);
+
+        UserProfileModel profile = userService.getProfileById(userId);
+
+
+        if (task == null) {
+            throw new NotFoundException("There is no task with loginId :" + taskId);
+        } else if (profile == null) {
+            throw new NotFoundException("There is no task with user :" + taskId);
+        }
+        if (profile.getProfileId() == task.getWhoPosted().getProfileId()) {
+            throw new CantSubmitException();
+        }
+
+     submittedRepository.delete(submittedRepository.findAllBySubmittedTaskIdAndSubmittedUsersId(task, profile));
+    }
+
+    @Override
     public List<SubmittedModel> findAllBySubmittedUsersId(long userId) {
         return submittedRepository.findAllBySubmittedUsersId(userProfileRepository.findById(userId).orElse(null));
     }
