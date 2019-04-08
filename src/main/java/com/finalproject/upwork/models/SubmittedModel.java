@@ -11,16 +11,16 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@TableGenerator(name = "gen", allocationSize = 100)
+
 @Table(name = "submitted")
 public class SubmittedModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gen")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "userId")
+    @JoinColumn(referencedColumnName = "profileId")
     private UserProfileModel submittedUsersId;
 
     @OneToOne(cascade = CascadeType.ALL)

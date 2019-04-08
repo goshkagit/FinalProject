@@ -8,6 +8,7 @@ import com.finalproject.upwork.models.TaskModel;
 import com.finalproject.upwork.services.TaskFilterService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
 
     }
 
@@ -54,7 +55,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/typeAndPaymentIs/{type}/{payment}")
@@ -67,7 +68,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/typeAndDeadlineIs/{type}/{deadline}")
@@ -80,7 +81,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/hardnessIs/{hardness}")
@@ -93,7 +94,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/hardnessAndDeadlineIs/{hardness}/{deadline}")
@@ -106,7 +107,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/hardnessAndPaymentIs/{hardness}/{payment}")
@@ -119,7 +120,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/paymentIs/{payment}")
@@ -132,7 +133,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/paymentAndDeadlineIs/{payment}/{deadline}")
@@ -145,7 +146,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/deadlineIs/{deadline}")
@@ -158,7 +159,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/typeAndPaymentAndHardnessIs/{type}/{payment}/{hardness}")
@@ -171,7 +172,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/typeAndPaymentAndDeadlineIs/{type}/{payment}/{deadline}")
@@ -184,7 +185,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/typeAndDeadlineAndHardnessIs/{type}/{deadline}/{hardness}")
@@ -197,7 +198,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
     @GetMapping("/allFilters/{type}/{payment}/{deadline}/{hardness}")
@@ -210,7 +211,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
 
@@ -224,7 +225,7 @@ public class TaskFilterController {
                 .stream()
                 .map(TaskModel -> taskDTOModelMapper.map(TaskModel, TaskDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
 

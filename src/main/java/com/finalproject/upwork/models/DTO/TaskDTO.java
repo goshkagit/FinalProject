@@ -12,12 +12,12 @@ public class TaskDTO {
 
     private long taskID;
 
-    @Size(min = 3, max = 55)
     @SpecialChars
+    @com.finalproject.upwork.validation.annotations.Size
     private String topic;
 
-    @Size(min = 3, max = 350)
-    @NotBlank
+
+    @com.finalproject.upwork.validation.annotations.Size
     private String description;
 
     @SpecialChars
@@ -27,6 +27,7 @@ public class TaskDTO {
     private String type;
 
     private LocalDate deadline;
+
 
     private int payment;
 }

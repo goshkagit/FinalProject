@@ -83,13 +83,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(long id) {
+    public void deleteUser(long loginId, long profileId) {
 
-        UserLoginModel loginModel = userLoginRepository.findById(id).orElse(null);
-        UserProfileModel profileModel = userProfileRepository.findById(id).orElse(null);
+        UserLoginModel loginModel = userLoginRepository.findById(loginId).orElse(null);
 
-        if (loginModel == null || profileModel == null) {
-            throw new NotFoundException("There is no user with id :" + id);
+        UserProfileModel profileModel = userProfileRepository.findById(profileId).orElse(null);
+
+        if (loginModel == null) {
+            throw new NotFoundException("There is no user with login id :" + loginId);
+        } else if (profileModel == null) {
+            throw new NotFoundException("There is no user with profile id :" + profileId);
         }
         submittedRepository.findAllBySubmittedUsersId(profileModel).forEach(submittedModel -> submittedRepository.delete(submittedModel));
 

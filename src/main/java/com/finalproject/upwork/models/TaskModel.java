@@ -13,12 +13,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@TableGenerator(name = "gen", allocationSize = 100)
 @Table(name = "tasks")
 public class TaskModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gen")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long taskId;
 
     @Column(name = "topic", unique = true, nullable = false)
@@ -42,7 +41,7 @@ public class TaskModel {
     private int payment;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "userId", nullable = false)
+    @JoinColumn(referencedColumnName = "profileId", nullable = false)
     private UserProfileModel whoPosted;
 
 

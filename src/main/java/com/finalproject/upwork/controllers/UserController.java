@@ -10,6 +10,8 @@ import com.finalproject.upwork.services.UserService;
 import com.finalproject.upwork.services.impl.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,7 +44,7 @@ public class UserController {
 
         userService.addUser(userLoginModel);
 
-        return ResponseEntity.ok("Sign up successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Sign up successfully");
     }
 
     @PostMapping("/addUserDetails/{loginId}")
@@ -52,18 +54,18 @@ public class UserController {
 
         userService.addUserProfileDetails(userProfileModel, loginId);
 
-        return ResponseEntity.ok("Details added successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Details added successfully");
     }
 
     @Secured(value = "ROLE_USER")
-    @GetMapping("/getByID/{profileId}")
+    @GetMapping(value = "/getById/{profileId}")
     public ResponseEntity getUser(@PathVariable long profileId) {
         UserProfileModel profile = userService.getProfileById(profileId);
         if (profile == null) {
-            throw new NotFoundException("There is no user with id :" + profileId);
+            throw new NotFoundException("There is no user with loginId :" + profileId);
         }
         UserProfileModelDTO dto = profileDTOModelMapper.map(profile, UserProfileModelDTO.class);
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
     @Secured(value = "ROLE_USER")
@@ -73,21 +75,21 @@ public class UserController {
         UserProfileModel userProfileModel = profileModelMapper.map(userProfileModelDTO, UserProfileModel.class);
 
         if (userProfileModel == null) {
-            throw new NotFoundException("There is no user with id :" + profileId);
+            throw new NotFoundException("There is no user with loginId :" + profileId);
         }
         userService.updateProfile(userProfileModel, profileId);
 
-        return ResponseEntity.ok("Updated successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Updated successfully");
     }
 
 
-    @Secured(value = "ROLE_ADMIN")
-    @DeleteMapping("/deleteUser/{userId}")
-    public ResponseEntity deleteUser(@PathVariable long userId) {
+    @Secured(value = "ROLE_USER")
+    @DeleteMapping("/deleteUser/{loginId}/{profileId}")
+    public ResponseEntity deleteUser(@PathVariable long loginId, @PathVariable long profileId) {
 
-        userService.deleteUser(userId);
+        userService.deleteUser(loginId, profileId);
 
-        return ResponseEntity.ok("User deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
     }
 
 }

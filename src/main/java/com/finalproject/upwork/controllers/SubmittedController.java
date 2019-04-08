@@ -7,6 +7,7 @@ import com.finalproject.upwork.models.SubmittedModel;
 import com.finalproject.upwork.services.SubmitService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class SubmittedController {
 
         submitService.submit(taskId, userId);
 
-        return ResponseEntity.ok("Submitted");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Submitted");
     }
 
 
@@ -48,7 +49,7 @@ public class SubmittedController {
                 .stream()
                 .map(SubmittedModel -> modelMapper.map(SubmittedModel, GetSubmissionDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
 
@@ -64,7 +65,7 @@ public class SubmittedController {
                 .stream()
                 .map(SubmittedModel -> modelMapper.map(SubmittedModel, GetSubmissionDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
 }

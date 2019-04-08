@@ -8,6 +8,7 @@ import com.finalproject.upwork.services.UserFilterService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,6 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@Secured(value = "ROLE_USER")
 public class UserFilterController {
 
 
@@ -45,7 +45,7 @@ public class UserFilterController {
                 .stream()
                 .map(UserProfileModel -> profileDTOModelMapper.map(UserProfileModel, UserProfileModelDTO.class))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
 
@@ -61,7 +61,7 @@ public class UserFilterController {
                 .map(UserProfileModel -> profileDTOModelMapper.map(UserProfileModel, UserProfileModelDTO.class))
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
 
@@ -77,7 +77,7 @@ public class UserFilterController {
                 .map(UserProfileModel -> profileDTOModelMapper.map(UserProfileModel, UserProfileModelDTO.class))
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(allDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
     }
 
 
@@ -91,6 +91,19 @@ public class UserFilterController {
 
         GetUserLoginDTO getUserLoginDTO = modelMapper.map(user, GetUserLoginDTO.class);
 
-        return ResponseEntity.ok(getUserLoginDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(getUserLoginDTO);
+    }
+
+    @GetMapping("/loginIdIs/{loginId}")
+    public ResponseEntity getByNickname(@PathVariable long loginId) {
+
+        UserProfileModel profileModel = userFilterService.whereUserIdIs(loginId);
+        if (profileModel == null) {
+            throw new NotFoundException("There is no user with loginId :" + loginId);
+        }
+
+        UserProfileModelDTO userProfileModelDTO = modelMapper.map(profileModel, UserProfileModelDTO.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(userProfileModelDTO);
     }
 }

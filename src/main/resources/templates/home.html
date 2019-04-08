@@ -1,12 +1,173 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>User Main Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Home.css}" href="../static/css/Home.css">
+    <title>UpWork</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<h1 th:inline="text">Here is main page of : [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<ul class="top">
+    <b id="logo">UpWork</b>
+    <li><a class="topButton">
+        <form th:action="@{/logout}" method="post">
+            <button id="signOut" type="submit" value="Sign Out">Sign Out</button>
+        </form>
+    </a></li>
+    <li id="user"><a class="topButton" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a></li>
+</ul>
+
+<div class="buttons">
+    <button class="TaskButton" onclick="taskActive()">Tasks Menu</button>
+    <button class="UserButton" onclick="userActive()">Users Menu</button>
+
+</div>
+<section class="filter">
+
+</section>
+<script>
+    function taskActive() {
+        $(".TaskButton").attr("id", "active");
+        $(".UserButton").attr("id", "u");
+        $(".filter").html("");
+        $(".filter").html("" +
+            "<div>" +
+            "<div id='filterButtons'>" +
+            "<button id=\"filterButton1\" onclick='getAll()'>All Tasks</button>" +
+            "<button id=\"filterButton2\" onclick='toPost()' >Post Task</button>" +
+            "</div>" +
+            "</div>" +
+            "<h1>Task Filters\n</h1>" +
+            "    <p class=\"filerDiv\"></p>\n" +
+            "      <div class=\"filerDiv\"><a>Type:</a> <div> <select  required >\\n\" +\n" +
+            "          \"  <option></option>\\n\" +\n" +
+            "          \"  <option>Java</option>\\n\" +\n" +
+            "          \"  <option>Design</option>\\n\" +\n" +
+            "          \"  <option>Site_layout</option>\\n\" +\n" +
+            "          \"  <option>Python</option>\\n\" +\n" +
+            "          \"  <option>Java_script</option>\\n\" +\n" +
+            "          \"  <option>Management</option>\\n\" +\n" +
+            "          \"  <option>Promotion</option>\\n\" +\n" +
+            "          \"  <option>C_sharp</option>\\n\" +\n" +
+            "          \"  <option>C_plus_plus</option>\\n\" +\n" +
+            "          \"  <option>C</option>\\n\" +\n" +
+            "          \"  <option>Stock_photos</option>\\n\" +\n" +
+            "          \"  <option>Photo_retouch</option>\\n\" +\n" +
+            "          \"</select></div><p></p></div>\n" +
+            "    <p></p>\n" +
+            "    <div class=\"filerDiv\">\n" +
+            "        <a>Hardness:</a>\n" +
+            "        <div>\n" +
+            "        <select>\n" +
+            "            <option></option>\n" +
+            "            <option>Easy</option>\n" +
+            "            <option>Medium</option>\n" +
+            "            <option>Hard</option>\n" +
+            "        </select>\n" +
+            "        </div><p></p>\n" +
+            "    </div>\n" +
+            "    <p></p>\n" +
+            "    <div class=\"filerDiv\">\n" +
+            "        <a>Deadline:</a>\n" +
+            "        <div>\n" +
+            "            <input type=\"date\"  name=\"Deadline\"\n" +
+            "                   min=\"2019-01-01\" max=\"2019-12-31\">\n" +
+            "        </div><p></p>\n" +
+            "    </div>\n" +
+            "    <p></p>\n" +
+            "    <div class=\"filerDiv\">\n" +
+            "        <a>Payment:</a>\n" +
+            "        <div>\n" +
+            "         <input type=\"number\"\n" +
+            "         min=\"1\" max=\"1000\">\n" +
+            "        </div><p></p>\n" +
+            "    </div>\n" +
+            "    <div style=\"text-align: center\">\n" +
+            "        <p> </p>\n" +
+            "        <button class=\"filterButton\">Filter</button>\n" +
+            "    </div>")
+    }
+
+    function userActive() {
+        $(".TaskButton").attr("id", "t");
+        $(".UserButton").attr("id", "active");
+        $(".filter").html("");
+        $(".filter").html("" +
+            "<div id='filterButtons'>" +
+            "<button id=\"filterButton1\" >All Users</button>" +
+            "</div>" +
+            " <h1>User Filters</h1>\n" +
+            "    <p class=\"filerDiv\"></p>\n" +
+            "      <div class=\"filerDiv\"><a>Skill:</a> <div> <select  required >\\n\" +\n" +
+            "          \"  <option></option>\\n\" +\n" +
+            "          \"  <option>Java</option>\\n\" +\n" +
+            "          \"  <option>Design</option>\\n\" +\n" +
+            "          \"  <option>Site_layout</option>\\n\" +\n" +
+            "          \"  <option>Python</option>\\n\" +\n" +
+            "          \"  <option>Java_script</option>\\n\" +\n" +
+            "          \"  <option>Management</option>\\n\" +\n" +
+            "          \"  <option>Promotion</option>\\n\" +\n" +
+            "          \"  <option>C_sharp</option>\\n\" +\n" +
+            "          \"  <option>C_plus_plus</option>\\n\" +\n" +
+            "          \"  <option>C</option>\\n\" +\n" +
+            "          \"  <option>Stock_photos</option>\\n\" +\n" +
+            "          \"  <option>Photo_retouch</option>\\n\" +\n" +
+            "          \"</select></div><p></p></div>\n" +
+            "    <p></p>\n" +
+            "    <div class=\"filerDiv\">\n" +
+            "        <a>Nickname:</a>\n" +
+            "        <div>\n" +
+            " <input type='text'>" +
+            "        </div><p></p>\n" +
+            "    </div>\n" +
+            "    <p></p>\n" +
+            "    <div style=\"text-align: center\">\n" +
+            "        <p> </p>\n" +
+            "        <button class=\"filterButton\">Filter</button>\n" +
+            "    </div>")
+    }
+
+    $("#filterButton1").on("click", function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/allTasks",
+
+            contentType: "application/json",
+
+            dataType: "json",
+            success: function (returnval) {
+                $("#error2").html(returnval)
+            },
+            statusCode: {
+                202: function (returnval) {
+                    var test = JSON.parse(returnval);
+                    alert(test);
+                }
+            }
+        });
+    });
+
+    function toPost() {
+        document.location.href = "http://localhost:8080/addTask";
+    }
+
+    function getAll() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/allTasks",
+
+            contentType: "application/json",
+            dataType: "json",
+            success: function (returnval) {
+                alert(returnval);
+            },
+            statusCode: {
+                202: function (returnval) {
+
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

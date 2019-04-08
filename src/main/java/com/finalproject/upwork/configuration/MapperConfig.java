@@ -81,7 +81,7 @@ public class MapperConfig {
             model.setSurname(dto.getSurname());
             model.setEmail(dto.getEmail());
             model.setPortfolio(dto.getPortfolio());
-            model.setId(dto.getId());
+            model.setProfileId(dto.getId());
             model.setSkill(Type.valueOf(dto.getSkill().toUpperCase()));
 
             return model;
@@ -102,7 +102,7 @@ public class MapperConfig {
             dto.setSurname(model.getSurname());
             dto.setEmail(model.getEmail());
             dto.setPortfolio(model.getPortfolio());
-            dto.setId(model.getId());
+            dto.setId(model.getProfileId());
             dto.setSkill(model.getSkill().toString().toLowerCase());
 
             return dto;

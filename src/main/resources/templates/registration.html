@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>'
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginStyle.css}" href="../static/css/loginStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="box" id="registerBox">
+    <div class="input">
+        <h3>REGISTRATION</h3>
+
+        <div id="error"></div>
+
+        <p></p>
+
+    </div>
+    <div class="input">
+        <div><label> Nickname : <input id="nickname" type="text" name="username"/> </label>
+            <p></p></div>
+    </div>
+    <div>
+
+    </div>
+    <div class="input">
+        <div><label> Password&nbsp;&nbsp;: <input id="password" type="password" name="password"/> </label></div>
+    </div>
+    <div class="input">
+        <p>
+        <div>
+            <button class="nextButton" style="vertical-align:middle"><span>Next</span></button>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(".nextButton").on("click", function () {
+
+        var UserLogin = {
+            nickname: $("#nickname").val(),
+            password: $("#password").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/addUser",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify(UserLogin),
+
+            success: function (returnval) {
+                $("#error").html(returnval)
+            },
+
+            statusCode: {
+                201: function () {
+                    $("#registerBox").html("   <div class=\"input\">\n" +
+                        "            <h3>&nbsp;PROFILE DETAILS</h3>\n" +
+                        "\n" +
+                        "                <div id=\"error2\"></div>\n" +
+                        "\n" +
+                        "            <p></p>\n" +
+                        "\n" +
+                        "        </div>\n" +
+                        "        <div class=\"input\">\n" +
+                        "            <div><label> Name : <input id=\"name\" type=\"text\" name=\"name\"/> </label><p></p></div>\n" +
+                        "        </div>\n" +
+                        "        <div>\n" +
+                        "\n" +
+                        "        </div>\n" +
+                        "        <div class=\"input\">\n" +
+                        "       <div><label>Surname : <input id=\"surname\" type=\"surname\" name=\"surname\"/> </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p></p></div>\n" +
+                        "        </div>\n" +
+                        " <div class=\"input\">\n" +
+                        "            <div><label> Email : <input id=\"email\" type=\"email\" name=\"email\"/> </label><p></p></div>\n" +
+                        "        </div>\n" +
+                        "   <div class=\"input\" >\n" +
+                        "            <div> Skill:  <select id='skill' required >\n" +
+                        "  <option>Java</option>\n" +
+                        "  <option>Design</option>\n" +
+                        "  <option>Site_layout</option>\n" +
+                        "  <option>Python</option>\n" +
+                        "  <option>Java_script</option>\n" +
+                        "  <option>Management</option>\n" +
+                        "  <option>Promotion</option>\n" +
+                        "  <option>C_sharp</option>\n" +
+                        "  <option>C_plus_plus</option>\n" +
+                        "  <option>C</option>\n" +
+                        "  <option>Stock_photos</option>\n" +
+                        "  <option>Photo_retouch</option>\n" +
+                        "</select><p></p></div>\n" +
+                        "        <div class=\"input\">\n" +
+                        "            <div><label> Portfolio : <input id=\"portfolio\" type=\"portfolio\" name=\"portfolio\"/> </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p></p></div>\n" +
+                        "        </div>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"input\">\n" +
+                        "            <div><button class=\"nextButton\" type=\"submit\" style=\"vertical-align:middle\" ><span>Next</span></button></div>\n" +
+                        "        </div>");
+                    getLogin(UserLogin.nickname)
+                }
+            }
+
+        });
+    });
+
+    function profileDetails(data) {
+        $(".nextButton").on("click", function () {
+                var UserProfile = {
+                    name: $("#name").val(),
+                    surname: $("#surname").val(),
+                    email: $("#email").val(),
+                    skill: $("#skill").val(),
+                    portfolio: $("#portfolio").val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/addUserDetails/" + data,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify(UserProfile),
+
+                    success: function (returnval) {
+                        $("#error2").html(returnval)
+                    },
+                    statusCode: {
+                        201: function (returnval) {
+                            alert(returnval);
+                            document.location.href = "http://localhost:8080/login";
+                        }
+                    }
+                });
+            }
+        )
+    }
+
+    function getLogin(data) {
+        $(".nextButton").on("click", function () {
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/nicknameIs/" + data,
+
+                contentType: "application/json",
+
+                dataType: "json",
+                success: function (returnval) {
+                    $("#error2").html(returnval)
+                },
+                statusCode: {
+                    202: function (returnval) {
+                        alert(returnval.id);
+                        profileDetails(returnval.id);
+                    }
+                }
+            })
+        })
+    }
+</script>
+</body>
+</html>

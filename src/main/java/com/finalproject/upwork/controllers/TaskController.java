@@ -7,6 +7,7 @@ import com.finalproject.upwork.models.TaskModel;
 import com.finalproject.upwork.services.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class TaskController {
 
         taskService.addTask(taskModel, userId);
 
-        return ResponseEntity.ok("Task uploaded successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Task uploaded successfully");
     }
 
 
@@ -44,12 +45,12 @@ public class TaskController {
         TaskModel task = taskService.getTask(whoPostedId);
 
         if (task == null) {
-            throw new NotFoundException("There is no task with id :" + whoPostedId);
+            throw new NotFoundException("There is no task with loginId :" + whoPostedId);
         }
 
         TaskDTO dto = taskDTOModelMapper.map(task, TaskDTO.class);
 
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
 
     }
 
@@ -60,11 +61,11 @@ public class TaskController {
         TaskModel taskModel = taskModelMapper.map(taskDTO, TaskModel.class);
 
         if (taskModel == null) {
-            throw new NotFoundException("There is no task with id :" + taskId);
+            throw new NotFoundException("There is no task with loginId :" + taskId);
         }
         taskService.updateTask(taskModel, taskId);
 
-        return ResponseEntity.ok("Task updated successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Task updated successfully");
     }
 
 
@@ -73,7 +74,7 @@ public class TaskController {
 
         taskService.deleteTask(taskId);
 
-        return ResponseEntity.ok("Task deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Task deleted successfully");
     }
 
 }

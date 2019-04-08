@@ -1,19 +1,79 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
     <title>Login</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginStyle.css}" href="../static/css/loginStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
+
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+
+
+<div class="box">
+    <form th:action="@{/login}" method="post">
+
+        <div class="input">
+            <h3>LOGIN</h3>
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <p></p>
+        </div>
+        <div class="input">
+            <div><label> Nickname : <input type="text" id="nickname" name="username"/> </label></div>
+        </div>
+        <div>
+
+        </div>
+        <div class="input">
+            <div><label> Password :&nbsp;&nbsp;<input type="password" name="password"/> </label></div>
+        </div>
+        <div class="input">
+            <p>
+            <div>
+                <button class="button" id="login">Login</button>
+            </div>
+        </div>
+    </form>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
+<div class="box2">
+    <h4>Don't have account? Register now</h4>
+    <div>
+        <button class="button" id="#register" type="submit" value="Registration">Registration</button>
+    </div>
+
+    <script>
+
+        $("#register").on("click", function () {
+            document.location.href = "http://localhost:8080/register"
+        });
+        $("#login").on("click", function () {
+            var nickname = $("#nickname").val();
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/nicknameIs/" + nickname,
+                contentType: "application/json",
+
+                dataType: "json",
+                statusCode: {
+                    202: function (returnval) {
+                        sessionStorage.setItem("id", returnval.id);
+                    }
+
+                }
+            })
+        });
+
+
+    </script>
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In" th:href="@{/templates/home.html}"/></div>
-</form>
 </body>
 </html>

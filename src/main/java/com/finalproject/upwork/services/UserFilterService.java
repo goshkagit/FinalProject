@@ -1,6 +1,7 @@
 package com.finalproject.upwork.services;
 
 import com.finalproject.upwork.models.DTO.GetDTO.GetUserLoginDTO;
+import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.models.enums.Type;
 
@@ -15,4 +16,6 @@ public interface UserFilterService {
     GetUserLoginDTO whereNicknameIs(String nickname);
 
     List<UserProfileModel> whereNameAndSkillIs(String name, String skill);
+
+    UserProfileModel whereUserIdIs(long id);
 }

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PostTask</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginStyle.css}" href="../static/css/loginStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="box">
+    <h3 style="text-align: center">POST A TASK</h3>
+    <div style="text-align: center" id="error"></div>
+    <div class="input">
+        <div>Type:</div>
+        <label> <select id="type" required>
+            <option>Java</option>
+            <option>Design</option>
+            <option>Site_layout</option>
+            <option>Python</option>
+            <option>Java_script</option>
+            <option>Management</option>
+            <option>Promotion</option>
+            <option>C_sharp</option>
+            <option>C_plus_plus</option>
+            <option>C</option>
+            <option>Stock_photos</option>
+            <option>Photo_retouch</option>
+        </select></label>
+    </div>
+    <p></p>
+    <div class="input">
+        <div>Hardness:</div>
+        <label>
+            <select id="hardness">
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+            </select></label>
+        <p></p>
+    </div>
+    <p></p>
+    <div class="input">
+        <div>Deadline:</div>
+        <label>
+            <input type="date" id="date" name="Deadline" min="2019-01-01" max="2019-12-31"></label>
+    </div>
+    <p></p>
+    <div class="input">
+        <div>Payment:</div>
+        <label>
+
+            <input id="payment" type="number" min="1" max="1000">
+        </label>
+
+    </div>
+
+    <div class="input">
+        <p class="input"> Topic:</p> <textarea name="topic" id="topic"></textarea>
+
+        <p class="input"> Description:</p> <textarea name="description" id="description"></textarea>
+    </div>
+
+
+    <div class="input">
+        <p></p>
+        <button class="nextButton" id="post" style="vertical-align: middle"><span>Post</span></button>
+    </div>
+</div>
+<script>
+    var profileId;
+
+    function getProfile() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/loginIdIs/" + sessionStorage.getItem("id"),
+            contentType: "application/json",
+
+            dataType: "json",
+            statusCode: {
+                202: function (profile) {
+                    profileId = profile.id;
+                }
+            }
+        })
+    }
+
+    $("#post").on("click", function () {
+        var task = {
+            type: $("#type").val(),
+            hardness: $("#hardness").val(),
+            deadline: $("#date").val(),
+            payment: $("#payment").val(),
+            topic: $("#topic").val(),
+            description: $("#description").val()
+        };
+        getProfile();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/addTask/" + profileId,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify(task),
+            success: function (returnval) {
+                $("#error").html(returnval);
+            },
+            statusCode: {
+                201: function (returnval) {
+                    alert(returnval);
+                    document.location.href = "http://localhost:8080/home"
+                }
+            }
+        })
+    });
+
+
+</script>
+</body>
+</html>

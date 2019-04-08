@@ -1,7 +1,6 @@
 package com.finalproject.upwork.handlers;
 
-import com.finalproject.upwork.exception.NotFoundException;
-import com.finalproject.upwork.exception.SpecialCharsException;
+import com.finalproject.upwork.exception.*;
 import com.mysql.cj.exceptions.WrongArgumentException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RestControllerAdvice
 @EnableWebMvc
-public class UserExceptionHandler {
+public class AllExceptionHandler {
 
     @ExceptionHandler(WrongArgumentException.class)
     public ResponseEntity WrongArgumentExceptionHandler(WrongArgumentException exc) {
@@ -38,7 +37,7 @@ public class UserExceptionHandler {
     @ExceptionHandler(SpecialCharsException.class)
     public ResponseEntity SpecialCharsExceptionHandler(SpecialCharsException exc) {
 
-        return ResponseEntity.ok("Special chars not allowed");
+        return ResponseEntity.ok(exc.getMessage());
 
     }
 
@@ -49,5 +48,32 @@ public class UserExceptionHandler {
 
     }
 
+    @ExceptionHandler(NotUrlException.class)
+    public ResponseEntity NotUrlExceptionHandler(NotUrlException exc) {
+
+        return ResponseEntity.ok(exc.getMessage());
+
+    }
+
+    @ExceptionHandler(SizeException.class)
+    public ResponseEntity SizeHandler(SizeException exc) {
+
+        return ResponseEntity.ok(exc.getMessage());
+
+    }
+
+    @ExceptionHandler(WrongEmailException.class)
+    public ResponseEntity EmailHandler(WrongEmailException exc) {
+
+        return ResponseEntity.ok(exc.getMessage());
+
+    }
+
+    @ExceptionHandler(CantSubmitException.class)
+    public ResponseEntity SubmitHandler(CantSubmitException exc) {
+
+        return ResponseEntity.ok("You cant submit to the task that you posted ");
+
+    }
 
 }

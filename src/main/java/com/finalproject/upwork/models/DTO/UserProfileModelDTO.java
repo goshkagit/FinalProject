@@ -1,5 +1,6 @@
 package com.finalproject.upwork.models.DTO;
 
+import com.finalproject.upwork.validation.annotations.Page;
 import com.finalproject.upwork.validation.annotations.SpecialChars;
 import lombok.Data;
 
@@ -13,21 +14,22 @@ public class UserProfileModelDTO {
     private long id;
 
     @SpecialChars
-    @Size(min = 2)
+    @com.finalproject.upwork.validation.annotations.Size
     private String surname;
 
     @SpecialChars
-    @Size(min = 3)
+    @com.finalproject.upwork.validation.annotations.Size
     private String name;
 
     @SpecialChars
     private String skill;
 
     @Email
-    @NotBlank
+    @com.finalproject.upwork.validation.annotations.Size
     private String email;
 
-    @Size(min = 3, max = 100)
+    @Page
+    @com.finalproject.upwork.validation.annotations.Size
     private String portfolio;
 
 

@@ -1,6 +1,7 @@
 package com.finalproject.upwork.models.DTO;
 
 import com.finalproject.upwork.validation.annotations.SpecialChars;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -12,10 +13,10 @@ public class UserLoginDTO {
     private long id;
 
     @SpecialChars
-    @Size(min = 3, max = 15)
+    @com.finalproject.upwork.validation.annotations.Size
     private String nickname;
 
-    @Size(min = 3)
-    @NotBlank
+
+    @com.finalproject.upwork.validation.annotations.Size
     private String password;
 }

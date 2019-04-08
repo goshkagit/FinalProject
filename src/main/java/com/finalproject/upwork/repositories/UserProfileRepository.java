@@ -1,5 +1,6 @@
 package com.finalproject.upwork.repositories;
 
+import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.models.UserProfileModel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +19,6 @@ public interface UserProfileRepository extends JpaRepository<UserProfileModel, L
 
     List<UserProfileModel> findAllByNameAndSkill(String name, Type skill);
 
+    UserProfileModel findByUserId(UserLoginModel userId);
 
 }

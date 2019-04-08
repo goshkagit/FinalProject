@@ -1,0 +1,109 @@
+.box {
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    width: 600px;
+}
+
+.box2 {
+    margin: 50px auto 0px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    width: 600px;
+    text-align: center;
+}
+
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.input {
+    text-align: center;
+}
+
+.name {
+    text-align: center;
+}
+
+.button {
+    border: none;
+    background-color: #65C522;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nextButton {
+    border: none;
+    background-color: #65C522;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.nextButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.nextButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.nextButton:hover span {
+    padding-right: 25px;
+}
+
+.nextButton:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nextButton:hover span:after {
+    opacity: 1;
+    right: 0;
+
+}
+
+#error {
+    color: red;
+}
+
+#error2 {
+    color: red;
+}
+
+#topic {
+    size: 250px;
+
+}
+
+#description {
+    size: 350px;
+    width: 200px;
+    height: 100px;
+}

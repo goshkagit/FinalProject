@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+}
+
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+ul.top {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #65C522;
+}
+
+ul.top li {
+    float: right;
+}
+
+#logo {
+    color: white;
+    margin: 35px 10px 10px 10px;
+    font-size: 40px;
+}
+
+ul.top li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+}
+
+ul.top li a:hover:not(.active) {
+    background-color: gray;
+}
+
+ul.top li a.active {
+    background-color: #65C522;
+}
+
+ul.top li.right {
+    float: right;
+}
+
+.buttons .TaskButton {
+    background-color: lightgray;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.buttons .UserButton {
+    background-color: lightgray;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+#filterButtons {
+    text-align: center;
+}
+
+.filter {
+    margin: 50px 0 0 0;
+    text-align: center;
+    width: 282px;
+    background-color: #EEEEEE;
+    height: 554px;
+    position: absolute;
+
+}
+
+#active {
+    background-color: #65C522;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.filerDiv {
+    border-bottom: solid 2px gray;
+}
+
+#filterButton1 {
+    border: none;
+    background-color: #65C522;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 0 10px 0;
+    cursor: pointer;
+}
+
+#filterButton2 {
+    border: none;
+    background-color: #65C522;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+#filterButton1:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#filterButton2:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

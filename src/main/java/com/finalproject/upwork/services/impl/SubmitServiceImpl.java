@@ -1,5 +1,6 @@
 package com.finalproject.upwork.services.impl;
 
+import com.finalproject.upwork.exception.CantSubmitException;
 import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.models.SubmittedModel;
 import com.finalproject.upwork.models.TaskModel;
@@ -44,9 +45,13 @@ public class SubmitServiceImpl implements SubmitService {
 
 
         if (task == null) {
-            throw new NotFoundException("There is no task with id :" + taskId);
+            throw new NotFoundException("There is no task with loginId :" + taskId);
         } else if (profile == null) {
             throw new NotFoundException("There is no task with user :" + taskId);
+        }
+
+        if (profile.getProfileId() == task.getWhoPosted().getProfileId()) {
+            throw new CantSubmitException();
         }
 
         SubmittedModel submittedModel = new SubmittedModel();

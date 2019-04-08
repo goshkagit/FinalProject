@@ -54,5 +54,12 @@ public class UserFilterServiceImpl implements UserFilterService {
         return userProfileRepository.findAllByNameAndSkill(name, Type.valueOf(skill.toUpperCase()));
     }
 
+    @Override
+    public UserProfileModel whereUserIdIs(long loginId) {
+        UserLoginModel userLoginModel = userLoginRepository.findById(loginId).orElse(null);
+
+        return userProfileRepository.findByUserId(userLoginModel);
+    }
+
 
 }
