@@ -16,4 +16,6 @@ public interface UserFilterService {
     List<UserProfileModel> whereNameAndSkillIs(String name, String skill);
 
     UserProfileModel whereUserIdIs(long id);
+
+    List<UserProfileModel> getAllUsers();
 }

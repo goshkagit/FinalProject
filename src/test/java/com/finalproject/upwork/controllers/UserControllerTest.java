@@ -9,7 +9,6 @@ import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.repositories.UserLoginRepository;
 import com.finalproject.upwork.repositories.UserProfileRepository;
-import com.finalproject.upwork.services.impl.UserDetailsServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,16 +58,12 @@ public class UserControllerTest {
     @Autowired
     private UserLoginRepository userLoginRepository;
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
 
     @Test
     @Transactional
     public void addUserLogin() throws Exception {
 
         UserLoginDTO userLoginDTO = new UserLoginDTO();
-
-        userLoginDTO.setId(1);
         userLoginDTO.setNickname("Johny22");
         userLoginDTO.setPassword("qwerty12345");
 
@@ -89,17 +84,15 @@ public class UserControllerTest {
     @Test
     public void addUserProfile() throws Exception {
         UserLoginDTO userLoginDTO = new UserLoginDTO();
-        userLoginDTO.setId(1);
         userLoginDTO.setNickname("Johny22");
         userLoginDTO.setPassword("qwerty12345");
 
         UserProfileModelDTO userProfileModelDTO = new UserProfileModelDTO();
-        userProfileModelDTO.setId(1);
         userProfileModelDTO.setName("John");
         userProfileModelDTO.setSurname("Conker");
         userProfileModelDTO.setEmail("john214@gmail.com");
         userProfileModelDTO.setSkill("java");
-        userProfileModelDTO.setPortfolio("https://www.google.com");
+        userProfileModelDTO.setPortfolio("https://www.google2.com");
 
         String json = objectMapper.writeValueAsString(userProfileModelDTO);
 
@@ -126,7 +119,7 @@ public class UserControllerTest {
     @Transactional
     public void getProfile() throws Exception {
         UserLoginModel userLogin = new UserLoginModel();
-        userLogin.setNickname("Johny22");
+        userLogin.setNickname("Johny222");
         userLogin.setPassword("qwerty12345");
 
         UserProfileModel userProfileModel = new UserProfileModel();
@@ -191,7 +184,7 @@ public class UserControllerTest {
 
 
     @Test
-    @WithMockUser(value = "admin", roles = "ADMIN", username = "test", password = "test")
+    @WithMockUser(value = "adminTest", roles = "ADMIN , USER", username = "test2", password = "test")
     @Transactional
     public void deleteUser() throws Exception {
 
@@ -200,18 +193,18 @@ public class UserControllerTest {
         UserProfileModel userProfileModel = new UserProfileModel();
 
 
-        userLogin.setNickname("Jack33");
+        userLogin.setNickname("Jack334");
         userLogin.setPassword("qwerty12345");
 
 
         userLogin = userLoginRepository.save(userLogin);
 
 
-        userProfileModel.setName("Jack");
-        userProfileModel.setSurname("Conker");
-        userProfileModel.setEmail("jack214@gmail.com");
+        userProfileModel.setName("Jack33");
+        userProfileModel.setSurname("Conker2");
+        userProfileModel.setEmail("jack2143@gmail.com");
         userProfileModel.setSkill(Type.PHOTO_RETOUCH);
-        userProfileModel.setPortfolio("https://www.google.3com");
+        userProfileModel.setPortfolio("https://www.google33.com");
 
 
         userProfileModel = userProfileRepository.save(userProfileModel);

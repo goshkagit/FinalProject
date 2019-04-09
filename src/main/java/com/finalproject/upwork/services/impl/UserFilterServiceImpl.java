@@ -61,5 +61,10 @@ public class UserFilterServiceImpl implements UserFilterService {
         return userProfileRepository.findByUserId(userLoginModel);
     }
 
+    @Override
+    public List<UserProfileModel> getAllUsers() {
+        return userProfileRepository.findAll();
+    }
+
 
 }

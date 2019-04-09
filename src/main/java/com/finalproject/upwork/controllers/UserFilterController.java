@@ -102,4 +102,21 @@ public class UserFilterController {
 
         return ResponseEntity.status(HttpStatus.OK).body(userProfileModelDTO);
     }
+
+    @GetMapping("/allProfile")
+    public ResponseEntity getAllProfiles() {
+
+        List<UserProfileModel> all = userFilterService.getAllUsers();
+
+        if (all == null) {
+            throw new NotFoundException("There is no users yet");
+        }
+
+        List<UserProfileModelDTO> allDTO = all
+                .stream()
+                .map(UserProfileModel -> profileDTOModelMapper.map(UserProfileModel, UserProfileModelDTO.class))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(allDTO);
+    }
 }

@@ -71,7 +71,7 @@ public class UserController {
         UserProfileModel userProfileModel = profileModelMapper.map(userProfileModelDTO, UserProfileModel.class);
 
         if (userProfileModel == null) {
-            throw new NotFoundException("There is no user with loginId :" + profileId);
+            throw new NotFoundException("There is no user with profileId :" + profileId);
         }
         userService.updateProfile(userProfileModel, profileId);
 

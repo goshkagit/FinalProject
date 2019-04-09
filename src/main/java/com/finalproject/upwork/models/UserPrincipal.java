@@ -22,7 +22,7 @@ public class UserPrincipal implements UserDetails {
         final List<GrantedAuthority> authorities = new ArrayList<>();
 
         authorities.add(new SimpleGrantedAuthority(userLoginModel.getRole().toString()));
-
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorities;
     }
 
