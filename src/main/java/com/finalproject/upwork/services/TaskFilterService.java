@@ -1,8 +1,6 @@
 package com.finalproject.upwork.services;
 
 import com.finalproject.upwork.models.TaskModel;
-import com.finalproject.upwork.models.enums.Hardness;
-import com.finalproject.upwork.models.enums.Type;
 
 import java.time.LocalDate;
 import java.util.List;

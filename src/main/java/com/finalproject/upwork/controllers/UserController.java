@@ -7,18 +7,14 @@ import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.services.UserService;
-import com.finalproject.upwork.services.impl.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 
 
 @RestController
@@ -98,7 +94,7 @@ public class UserController {
 
         userService.grandAdmin(nickname);
 
-        return ResponseEntity.status(HttpStatus.OK).body(nickname+" is admin now");
+        return ResponseEntity.status(HttpStatus.OK).body(nickname + " is admin now");
     }
 
 

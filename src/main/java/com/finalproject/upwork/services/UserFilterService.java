@@ -1,9 +1,7 @@
 package com.finalproject.upwork.services;
 
 import com.finalproject.upwork.models.DTO.GetDTO.GetUserLoginDTO;
-import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
-import com.finalproject.upwork.models.enums.Type;
 
 import java.util.List;
 

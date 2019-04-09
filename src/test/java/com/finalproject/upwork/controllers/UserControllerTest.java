@@ -4,19 +4,18 @@ package com.finalproject.upwork.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalproject.upwork.models.DTO.UserLoginDTO;
 import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
-
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.repositories.UserLoginRepository;
 import com.finalproject.upwork.repositories.UserProfileRepository;
+import com.finalproject.upwork.services.impl.UserDetailsServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
@@ -34,7 +33,8 @@ import static org.junit.Assert.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @RunWith(SpringRunner.class)
@@ -58,6 +58,9 @@ public class UserControllerTest {
 
     @Autowired
     private UserLoginRepository userLoginRepository;
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Test
     @Transactional
@@ -117,6 +120,7 @@ public class UserControllerTest {
                 .apply(springSecurity())
                 .build();
     }
+
     @WithMockUser("Johny22")
     @Test
     @Transactional
@@ -151,7 +155,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @WithMockUser("Johny22")
+    @WithMockUser()
     public void updateProfile() throws Exception {
 
         UserProfileModel userProfileModel = new UserProfileModel();
@@ -187,7 +191,7 @@ public class UserControllerTest {
 
 
     @Test
-    @WithMockUser("JohnyAdmin")
+    @WithMockUser(value = "admin", roles = "ADMIN", username = "test", password = "test")
     @Transactional
     public void deleteUser() throws Exception {
 
@@ -218,7 +222,7 @@ public class UserControllerTest {
 
         MvcResult mvcResult = mvc.perform(requestBuilder).andReturn();
 
-        assertEquals(mvcResult.getResponse().getStatus(), 403);
+        assertEquals(mvcResult.getResponse().getStatus(), 200);
         assertEquals(mvcResult.getResponse().getContentAsString(), "User deleted successfully");
 
 

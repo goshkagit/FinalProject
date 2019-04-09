@@ -1,11 +1,10 @@
 package com.finalproject.upwork.repositories;
 
 import com.finalproject.upwork.models.UserLoginModel;
-import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.models.UserProfileModel;
+import com.finalproject.upwork.models.enums.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 
 import java.util.List;
 

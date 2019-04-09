@@ -2,12 +2,9 @@ package com.finalproject.upwork.services.impl;
 
 
 import com.finalproject.upwork.exception.NotFoundException;
-import com.finalproject.upwork.exception.SpecialCharsException;
 import com.finalproject.upwork.models.UserLoginModel;
-import com.finalproject.upwork.models.UserPrincipal;
 import com.finalproject.upwork.models.UserProfileModel;
 import com.finalproject.upwork.models.enums.Roles;
-import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.repositories.SubmittedRepository;
 import com.finalproject.upwork.repositories.TaskRepository;
 import com.finalproject.upwork.repositories.UserLoginRepository;
@@ -16,8 +13,6 @@ import com.finalproject.upwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {

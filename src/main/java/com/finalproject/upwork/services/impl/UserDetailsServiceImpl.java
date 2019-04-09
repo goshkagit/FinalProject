@@ -3,7 +3,6 @@ package com.finalproject.upwork.services.impl;
 import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.models.UserLoginModel;
 import com.finalproject.upwork.models.UserPrincipal;
-import com.finalproject.upwork.repositories.UserLoginRepository;
 import com.finalproject.upwork.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

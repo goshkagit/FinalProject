@@ -79,7 +79,7 @@ public class SubmitServiceImpl implements SubmitService {
             throw new CantSubmitException();
         }
 
-     submittedRepository.delete(submittedRepository.findAllBySubmittedTaskIdAndSubmittedUsersId(task, profile));
+        submittedRepository.delete(submittedRepository.findAllBySubmittedTaskIdAndSubmittedUsersId(task, profile));
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.finalproject.upwork.controllers;
 
 import com.finalproject.upwork.exception.NotFoundException;
 import com.finalproject.upwork.models.DTO.TaskDTO;
-import com.finalproject.upwork.models.DTO.UserProfileModelDTO;
 import com.finalproject.upwork.models.TaskModel;
 import com.finalproject.upwork.services.TaskFilterService;
 import org.modelmapper.ModelMapper;

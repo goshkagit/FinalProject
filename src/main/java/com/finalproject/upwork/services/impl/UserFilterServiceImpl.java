@@ -3,8 +3,8 @@ package com.finalproject.upwork.services.impl;
 
 import com.finalproject.upwork.models.DTO.GetDTO.GetUserLoginDTO;
 import com.finalproject.upwork.models.UserLoginModel;
-import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.models.UserProfileModel;
+import com.finalproject.upwork.models.enums.Type;
 import com.finalproject.upwork.repositories.UserLoginRepository;
 import com.finalproject.upwork.repositories.UserProfileRepository;
 import com.finalproject.upwork.services.UserFilterService;

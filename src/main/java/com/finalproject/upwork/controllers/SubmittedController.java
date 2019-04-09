@@ -66,9 +66,9 @@ public class SubmittedController {
     }
 
     @DeleteMapping("/unSubmit/{taskId}/{profileId}")
-    public ResponseEntity unSubmit(@PathVariable long taskId , @PathVariable long profileId) {
+    public ResponseEntity unSubmit(@PathVariable long taskId, @PathVariable long profileId) {
 
-      submitService.unSubmit(taskId , profileId);
+        submitService.unSubmit(taskId, profileId);
 
         return ResponseEntity.status(HttpStatus.OK).body("Unsubmitted successfully");
     }

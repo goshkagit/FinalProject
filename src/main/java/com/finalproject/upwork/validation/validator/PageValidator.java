@@ -1,7 +1,6 @@
 package com.finalproject.upwork.validation.validator;
 
 import com.finalproject.upwork.exception.NotUrlException;
-import com.finalproject.upwork.exception.SpecialCharsException;
 import com.finalproject.upwork.validation.annotations.Page;
 
 import javax.validation.ConstraintValidator;

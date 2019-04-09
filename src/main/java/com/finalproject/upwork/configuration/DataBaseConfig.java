@@ -18,6 +18,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 @Component
 public class DataBaseConfig implements ApplicationRunner {
@@ -50,12 +51,12 @@ public class DataBaseConfig implements ApplicationRunner {
 
 
         TaskModel task = taskRepository.save(new TaskModel(8, "Stock photos retouching", " I need a freelancer who might retouch 50 photos due next week ", Hardness.MEDIUM, Type.PHOTO_RETOUCH, LocalDate.ofEpochDay(2019 - 04 - 16), 15, profile));
-        TaskModel task2 = taskRepository.save(new TaskModel(9, "Spring rest api", " I need a simple spring boot rest api ", Hardness.EASY, Type.JAVA, LocalDate.ofEpochDay(2019 - 04 - 12), 5, profile2));
-        TaskModel task3 = taskRepository.save(new TaskModel(10, "Logotype for online store", " I need a designed logotype for online store", Hardness.HARD, Type.DESIGN, LocalDate.ofEpochDay(2019 - 05 - 10), 20, profile3));
-        TaskModel task4 = taskRepository.save(new TaskModel(11, "Html css site layout", " I need a simple htm css site layout for online store", Hardness.EASY, Type.SITE_LAYOUT, LocalDate.ofEpochDay(2019 - 04 - 20), 3, profile3));
+        TaskModel task2 = taskRepository.save(new TaskModel(9, "Spring rest api", " I need a simple spring boot rest api ", Hardness.EASY, Type.JAVA, LocalDate.of(2019, Month.APRIL, 12), 5, profile2));
+        TaskModel task3 = taskRepository.save(new TaskModel(10, "Logotype for online store", " I need a designed logotype for online store", Hardness.HARD, Type.DESIGN, LocalDate.of(2019, Month.MAY, 10), 20, profile3));
+        TaskModel task4 = taskRepository.save(new TaskModel(11, "Html css site layout", " I need a simple htm css site layout for online store", Hardness.EASY, Type.SITE_LAYOUT, LocalDate.of(2019, Month.APRIL, 20), 3, profile3));
 
-        submittedRepository.save(new SubmittedModel((long) 12 ,profile3 , task));
-        submittedRepository.save(new SubmittedModel((long) 13 ,profile2 , task3));
+        submittedRepository.save(new SubmittedModel((long) 12, profile3, task));
+        submittedRepository.save(new SubmittedModel((long) 13, profile2, task3));
 
     }
 }
